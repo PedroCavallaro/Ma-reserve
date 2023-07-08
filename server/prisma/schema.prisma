@@ -9,3 +9,63 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id          String        @id @default(uuid())
+  username    String
+  password    String
+  picture     String
+  Reservation Reservation[]
+  Comments    Comments[]
+}
+
+model Restaurant {
+  id          String        @id @default(uuid())
+  name        String
+  pictures    String[]
+  max_guests  Int
+  highlights  String[]
+  latitude    String
+  longitude   String
+  Reservation Reservation[]
+  Menu        Menu[]
+  Comments    Comments[]
+}
+
+model Menu {
+  id           String     @id @default(uuid())
+  description  String
+  pictures     String[]
+  price        Float
+  Restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+}
+
+model Reservation {
+  id           String     @id @default(uuid())
+  guests       Int
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+  User         User       @relation(fields: [userId], references: [id])
+  userId       String
+  Schedule     Schedule   @relation(fields: [scheduleId], references: [id])
+  scheduleId   String
+}
+
+model Schedule {
+  id          String        @id @default(uuid())
+  day         DateTime
+  time        String
+  isReserved  Boolean
+  Reservation Reservation[]
+}
+
+model Comments {
+  id           String     @id @default(uuid())
+  comment      String
+  date         DateTime
+  User         User       @relation(fields: [userId], references: [id])
+  userId       String
+  Restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  restaurantId String
+}
