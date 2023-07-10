@@ -5,6 +5,7 @@ import { ReactNode } from 'react'
 import { Montserrat as Mosterrat } from 'next/font/google'
 import Header from './components/Header'
 
+
 const inter = Inter({ subsets: ['latin'] })
 const monsterrat = Mosterrat({
   subsets:['latin'],
@@ -23,7 +24,7 @@ export default function RootLayout({ children,}:
   return (
     <html lang="pt-br">
       <body className={`${inter.className} ${monsterrat.variable}`}>
-      <Header/>
+        <Header/>
         {children}
       </body>
       
