@@ -69,11 +69,3 @@ model User {
   Reservation Reservation[]
   Comments    Comments[]
 }
-
-// model VerificationToken {
-//   identifier String
-//   token      String   @unique
-//   expires    DateTime
-
-//   @@unique([identifier, token])
-// }

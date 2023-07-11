@@ -6,11 +6,11 @@ export default function Header() {
 
     return(
         
-        <header className='flex justify-between items-center container p-4 mx-auto shadow-md'>
+        <header className='flex justify-between py-0 h-[60px] items-center container p-4 mx-auto shadow-lg'>
             <div className='flex gap-2'>
-                <a href="/" className='flex'>
-                    <Pizza className='h-10 w-10 mt-2' color='#c27961'/>
-                    <h1 className='text-xl font-sans lg:text-2xl' >Ma <p className='ml-5'>Reserve</p></h1>
+                <a href="/" className='flex items-center gap-1'>
+                    <div className='rounded-full w-10 h-10 bg-orange-orangePrimary'></div>
+                    <h1 className='text-lg font-sans lg:text-2xl' >Ma <p className='ml-5'>Reserve</p></h1>
                 </a>
             </div>
             <div className=''>
