@@ -1,6 +1,6 @@
 import fastify from "fastify"
 import Cors from "@fastify/cors"
-import { userRoutes } from "./routes/user"
+import { authRoutes } from "./routes/auth"
 
 const app = fastify({
     logger: true
@@ -10,7 +10,7 @@ app.register(Cors, {
     origin: true
 })
 
-app.register(userRoutes)
+app.register(authRoutes)
 
 app.listen({
     port: 3333

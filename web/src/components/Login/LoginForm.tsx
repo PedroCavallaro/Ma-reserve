@@ -21,7 +21,6 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>
 
-
 export default function LoginForm() {
     const router = useRouter()
 
@@ -31,7 +30,6 @@ export default function LoginForm() {
             router.push(`../api/auth/google?code=${access_token}`)
 
         },
-        // flow: 'auth-code'
     })
     const {
         register,
@@ -44,7 +42,11 @@ export default function LoginForm() {
     })
 
     return (
-        <div className="p-1 min-w-[217px] min-h-[450px] flex flex-col gap-2 relative bg-white lg:h-[500px]  lg:min-w-[434px]">
+        <form 
+        onSubmit={handleSubmit( async ({username, password})=>{
+            router.push(`../api/auth?username=${username}&password=${password}`)
+        })}
+        className="p-1 min-w-[217px] min-h-[450px] flex flex-col gap-2 relative bg-white lg:h-[500px]  lg:min-w-[434px]">
             <div className="p-2">
                 <Logo href=""/>
             </div>
@@ -81,16 +83,17 @@ export default function LoginForm() {
                             <Link href="/Register"className="text-orange-orangePrimary hover:text-orange-400 cursor-pointer"> Cadastre-se</Link>
                     </div>
                 </label>
+                    <Input type="submit" value="Entrar" className="bg-orange-orangePrimary w-[80%] text-white p-1 cursor-pointer rounded-md hover:bg-orange-400 transition-all"/>
                 
                 <p>ou</p>
                 <div className="w-[70%] flex items-center flex-col gap-2 justify-center">
-                     <button onClick={()=> login()}>
+                     <button role="button"
+                      onClick={()=> login()}>
                          clica
                      </button>
-                <Input type="submit" value="Entrar" className="bg-orange-orangePrimary w-[80%] text-white p-1 cursor-pointer rounded-md hover:bg-orange-400 transition-all"/>
                 </div>
             </div>
 
-        </div>
+        </form>
     )
 };

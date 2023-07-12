@@ -5,6 +5,7 @@ import {z} from "zod"
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import { GoogleLogin, GoogleOAuthProvider, googleLogout } from "@react-oauth/google";
+import Link from "next/link";
 
 const schema = z.object({
     username: z.string({
@@ -65,6 +66,7 @@ export default function RegisterForm() {
                     errors.password && 
                             (<span className="text-red-500 text-sm">{errors.password?.message}</span>)
                     }
+                    <Link href="/Login" className="text-orange-orangePrimary text-sm">Voltar para o login</Link>
                 </label>
                 
                 <Input type="submit" value="Entrar" className="bg-orange-orangePrimary w-[80%] text-white p-1 cursor-pointer rounded-md hover:bg-orange-400 transition-all"/>
