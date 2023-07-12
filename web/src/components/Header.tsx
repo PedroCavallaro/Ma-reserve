@@ -1,4 +1,5 @@
 "use client"
+import  Link  from 'next/link';
 import Logged from './Logged';
 
 export default function Header() {
@@ -13,8 +14,8 @@ export default function Header() {
                 </a>
             </div>
             <div className=''>
-                {/* <a href="/" className='text-orange-400 underline cursor-pointer text-sm'>Login</a> */}
-                <Logged/>
+                <Link href="./Login" className='text-orange-400 underline cursor-pointer text-sm'>Login</Link>
+                {/* <Logged/> */}
             </div>
         </header>
     )

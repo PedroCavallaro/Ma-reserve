@@ -5,7 +5,8 @@ import {z} from "zod"
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import Link from "next/link"
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { useRouter } from "next/navigation";
+import { GoogleOAuthProvider, GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 
 const schema = z.object({
     username: z.string({
@@ -17,13 +18,21 @@ const schema = z.object({
         message: "Minimo 8 caractéres"
     })
 })
-// invalid_type_error: "Somente letras no nome de usuário"
 
 type FormData = z.infer<typeof schema>
 
 
 export default function LoginForm() {
-    console.log(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID)
+    const router = useRouter()
+
+    const login = useGoogleLogin({
+        onSuccess: async token =>{
+            const {access_token} = token
+            router.push(`../api/auth/google?code=${access_token}`)
+
+        },
+        // flow: 'auth-code'
+    })
     const {
         register,
         handleSubmit,
@@ -35,7 +44,7 @@ export default function LoginForm() {
     })
 
     return (
-        <form className="p-1 min-w-[217px] min-h-[450px] flex flex-col gap-2 relative bg-white lg:h-[500px]  lg:min-w-[434px]">
+        <div className="p-1 min-w-[217px] min-h-[450px] flex flex-col gap-2 relative bg-white lg:h-[500px]  lg:min-w-[434px]">
             <div className="p-2">
                 <Logo href=""/>
             </div>
@@ -67,24 +76,21 @@ export default function LoginForm() {
                     errors.password && 
                             (<span className="text-red-500 text-sm">{errors.password?.message}</span>)
                     }
-                    <p className="text-sm">Não tem uma conta?
-                        <Link href="/Register"className="text-orange-orangePrimary hover:text-orange-400 cursor-pointer"> Cadastre-se</Link>
-                    </p>
+                    <div className="flex text-sm items-center flex-col justify-center lg:flex-row lg: gap-1">
+                        <p className="">Não tem uma conta?</p>
+                            <Link href="/Register"className="text-orange-orangePrimary hover:text-orange-400 cursor-pointer"> Cadastre-se</Link>
+                    </div>
                 </label>
                 
-                <Input type="submit" value="Entrar" className="bg-orange-orangePrimary w-[80%] text-white p-1 cursor-pointer rounded-md hover:bg-orange-400 transition-all"/>
                 <p>ou</p>
-                <div className="w-[70%] flex items-center justify-center">
-                <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
-                        <GoogleLogin 
-                        size={"medium"}
-                        auto_select
-                        onSuccess={(cred)=>console.log(cred)}/>
-                </GoogleOAuthProvider>
-                    </div>
-
+                <div className="w-[70%] flex items-center flex-col gap-2 justify-center">
+                     <button onClick={()=> login()}>
+                         clica
+                     </button>
+                <Input type="submit" value="Entrar" className="bg-orange-orangePrimary w-[80%] text-white p-1 cursor-pointer rounded-md hover:bg-orange-400 transition-all"/>
+                </div>
             </div>
 
-        </form>
+        </div>
     )
 };
