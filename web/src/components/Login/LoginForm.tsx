@@ -7,12 +7,11 @@ import {zodResolver} from "@hookform/resolvers/zod"
 import Link from "next/link"
 import { useRouter } from "next/navigation";
 import { GoogleOAuthProvider, GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { api } from "@/app/lib/api";
 
 const schema = z.object({
-    username: z.string({
-        invalid_type_error: "Somente letras no nome de usuário"
-    }).min(3, {
-        message: "Minimo 3 caractéres"
+    email: z.string().email({
+        message: "Ex: exemplo@email.com"
     }),
     password: z.string().min(8, {
         message: "Minimo 8 caractéres"
@@ -43,8 +42,9 @@ export default function LoginForm() {
 
     return (
         <form 
-        onSubmit={handleSubmit( async ({username, password})=>{
-            router.push(`../api/auth?username=${username}&password=${password}`)
+        onSubmit={handleSubmit( async ({email, password})=>{
+           
+            router.push(`../api/auth/login?email=${email}&password=${password}`)
         })}
         className="p-1 min-w-[217px] min-h-[450px] flex flex-col gap-2 relative bg-white lg:h-[500px]  lg:min-w-[434px]">
             <div className="p-2">
@@ -55,13 +55,13 @@ export default function LoginForm() {
                 <label htmlFor=""
                 className="flex flex-col gap-1 w-[80%]"
                 >
-                    <p className="text-orange-orangePrimary text-sm">Usuário</p>
-                    <Input type="text" 
-                    {...register("username")}
+                    <p className="text-orange-orangePrimary text-sm">Email</p>
+                    <Input type="email" 
+                    {...register("email")}
                     placeholder="Nome de usuário" 
                     className=" border-orange-orangePrimary border-2 rounded-md p-1 text-sm lg:text-base outline-none"/>
-                    {errors.username &&
-                         (<span className="text-red-500 text-sm">{errors.username.message}</span>)
+                    {errors.email &&
+                         (<span className="text-red-500 text-sm">{errors.email.message}</span>)
                      
                     }
                 </label>

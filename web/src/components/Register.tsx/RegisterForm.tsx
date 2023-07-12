@@ -6,8 +6,12 @@ import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import { GoogleLogin, GoogleOAuthProvider, googleLogout } from "@react-oauth/google";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const schema = z.object({
+    email: z.string().email({
+        message: "Ex: exemplo@gmail.com"
+    }),
     username: z.string({
         invalid_type_error: "Somente letras no nome de usuário"
     }).min(3, {
@@ -23,6 +27,7 @@ type FormData = z.infer<typeof schema>
 
 
 export default function RegisterForm() {
+    const router = useRouter()
     const {
         register,
         handleSubmit,
@@ -34,7 +39,12 @@ export default function RegisterForm() {
     })
 
     return (
-        <form className="p-1 min-w-[217px] min-h-[450px] flex flex-col gap-2 relative bg-white lg:h-[500px]  lg:w-[434px]">
+        <form
+        onSubmit={handleSubmit(({email, password, username})=>{
+            router.push(`../api/auth/register?email=${email}&username=${username}&password=${password}`)
+
+        })} 
+        className="p-1 min-w-[217px] min-h-[450px] flex flex-col gap-2 relative bg-white lg:h-[500px]  lg:w-[434px]">
             <div className="p-2">
                 <Logo href={"/Login"}/>
             </div>
@@ -43,7 +53,20 @@ export default function RegisterForm() {
                 <label htmlFor=""
                 className="flex flex-col gap-1 w-[80%]"
                 >
-                    <p className="text-orange-orangePrimary text-sm">Usuário</p>
+                    <p className="text-orange-orangePrimary text-sm">Email</p>
+                    <Input type="text" 
+                    {...register("email")}
+                    placeholder="Email" 
+                    className=" border-orange-orangePrimary border-2 rounded-md p-1 text-sm lg:text-base outline-none"/>
+                    {errors.email &&
+                         (<span className="text-red-500 text-sm">{errors.email.message}</span>)
+                     
+                    }
+                </label>
+                <label htmlFor=""
+                className="flex flex-col gap-1 w-[80%]"
+                >
+                    <p className="text-orange-orangePrimary text-sm">Nome</p>
                     <Input type="text" 
                     {...register("username")}
                     placeholder="Nome de usuário" 
