@@ -1,21 +1,30 @@
 "use client"
 import { AlignJustify,User } from 'lucide-react';
-import Image from "next/image"
 import { useState } from 'react';
-export default function Logged() {
-    const[isMenuOpen, setIsMenuOpen ] = useState<boolean>(false)
+import Image from "next/image"
 
+interface UserInfoProps{
+    image?: string
+}
+
+export default function Logged(user: UserInfoProps) {
+    const [isMenuOpen, setIsMenuOpen ] = useState<boolean>(false)
+ 
     return(
-        <div className="rounded-full shadow-md flex p-1 h-10 items-center justify-center gap-3 relative">
+        <div className="rounded-full shadow-md flex  p-2 hs-10 items-center justify-center gap-3 relative">
             <AlignJustify className='cursor-pointer' size={23} onClick={()=> setIsMenuOpen(!isMenuOpen)}/>
             {isMenuOpen && (
-                <div className='absolute top-12 bg-orange-500 flex flex-col p-1 mr-2 shadow-xl'>
-                    <a href="" className='cursor-pointer text-sm'>Reservas</a>
-                    <a href="" className='cursor-pointer text-sm'>Logout</a>
+                <div className='absolute top-12 bg-orange-orangePrimary  text-white flex flex-col p-1 mr-2 shadow-xl z-50 '>
+                    <a href="" className='cursor-pointer text-[13px] shadow-lg p-1'>Reservas</a>
+                    <a href="" className='cursor-pointer text-[13px] text-sm p-1'>Logout</a>
                 </div>
             )}
-            <User size={23}/>
-            {/* <Image src={""} alt=''/> */}
+           
+            {
+                    user.image? <img src={`${user.image!}`} referrerPolicy="no-referrer" className='h-7 w-7 rounded-full '/> :  <User size={23}/>
+            }
+          
+            
         </div>
     )
 };

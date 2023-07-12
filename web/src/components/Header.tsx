@@ -1,11 +1,20 @@
 "use client"
 import  Link  from 'next/link';
 import Logged from './Logged';
+import { useEffect, useState } from 'react';
+import { User, getUser } from '@/app/lib/auth';
+import Cookies from 'js-cookie';
+
 
 export default function Header() {
+    const [userInfo, setUserInfo] = useState<User | null>()
+
+        useEffect(()=>
+            Cookies.get("token") ?  setUserInfo(getUser()) : setUserInfo(null)    
+        ,[])
+    console.log(userInfo)
 
     return(
-        
         <header className='flex justify-between py-0 h-[60px] items-center container p-4 mx-auto shadow-lg'>
             <div className='flex gap-2'>
                 <a href="/" className='flex items-center gap-1'>
@@ -14,8 +23,8 @@ export default function Header() {
                 </a>
             </div>
             <div className=''>
-                <Link href="./Login" className='text-orange-400 underline cursor-pointer text-sm'>Login</Link>
-                {/* <Logged/> */}
+                {userInfo  ? <Logged image={userInfo?.image}/> : 
+                    <Link href="./Login" className='text-orange-400 underline cursor-pointer text-sm'>Login</Link> }
             </div>
         </header>
     )

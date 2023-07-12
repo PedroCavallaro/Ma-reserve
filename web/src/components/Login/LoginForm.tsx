@@ -27,7 +27,7 @@ export default function LoginForm() {
         onSuccess: async token =>{
             const {access_token} = token
             router.push(`../api/auth/google?code=${access_token}`)
-
+            
         },
     })
     const {

@@ -17,9 +17,13 @@ module.exports = {
       },
       colors: {
         orange: {
-          orangePrimary: "#E5881B"
+          orangePrimary: "#E5881B",
+        },
+        gray:{
+          grayPrimary: "#D9D9D9"
         }
-      }
+      },
+    
     },
   },
   plugins: [],
