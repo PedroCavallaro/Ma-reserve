@@ -4,8 +4,7 @@ import Logo from "../Logo";
 import {z} from "zod"
 import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
-import Link from "next/link"
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, GoogleOAuthProvider, googleLogout } from "@react-oauth/google";
 
 const schema = z.object({
     username: z.string({
@@ -22,8 +21,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 
-export default function LoginForm() {
-    console.log(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID)
+export default function RegisterForm() {
     const {
         register,
         handleSubmit,
@@ -35,12 +33,12 @@ export default function LoginForm() {
     })
 
     return (
-        <form className="p-1 min-w-[217px] min-h-[450px] flex flex-col gap-2 relative bg-white lg:h-[500px]  lg:min-w-[434px]">
+        <form className="p-1 min-w-[217px] min-h-[450px] flex flex-col gap-2 relative bg-white lg:h-[500px]  lg:w-[434px]">
             <div className="p-2">
-                <Logo href=""/>
+                <Logo href={"/Login"}/>
             </div>
             <div className="flex flex-col justify-center items-center gap-2 lg:gap-3">
-            <h1 className="text-center text-lg lg:text-xl">Faça seu login</h1>
+            <h1 className="text-center text-lg lg:text-xl">Cadastre-se</h1>
                 <label htmlFor=""
                 className="flex flex-col gap-1 w-[80%]"
                 >
@@ -67,22 +65,18 @@ export default function LoginForm() {
                     errors.password && 
                             (<span className="text-red-500 text-sm">{errors.password?.message}</span>)
                     }
-                    <p className="text-sm">Não tem uma conta?
-                        <Link href="/Register"className="text-orange-orangePrimary hover:text-orange-400 cursor-pointer"> Cadastre-se</Link>
-                    </p>
                 </label>
                 
                 <Input type="submit" value="Entrar" className="bg-orange-orangePrimary w-[80%] text-white p-1 cursor-pointer rounded-md hover:bg-orange-400 transition-all"/>
                 <p>ou</p>
-                <div className="w-[70%] flex items-center justify-center">
-                <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
+                <div className="w-[100%] items-center justify-center flex overflow-hidden">
+                    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
                         <GoogleLogin 
-                        size={"medium"}
-                        auto_select
-                        onSuccess={(cred)=>console.log(cred)}/>
-                </GoogleOAuthProvider>
-                    </div>
+                        text={"continue_with"}
 
+                        onSuccess={()=>console.log("oui")}/>
+                    </GoogleOAuthProvider>
+                </div>
             </div>
 
         </form>

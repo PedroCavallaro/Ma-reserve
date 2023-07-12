@@ -1,5 +1,4 @@
 "use client"
-import { Pizza } from 'lucide-react';
 import Logged from './Logged';
 
 export default function Header() {
