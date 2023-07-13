@@ -9,9 +9,16 @@ import Cookies from 'js-cookie';
 export default function Header() {
     const [userInfo, setUserInfo] = useState<User | null>()
 
-        useEffect(()=>
-            Cookies.get("token") ?  setUserInfo(getUser()) : setUserInfo(null)    
-        ,[])
+    let token = Cookies.get("token")  
+    
+    useEffect(()=> {
+        if(Cookies.get("token")){
+            console.log("oi")
+            setUserInfo(getUser())     
+         }
+    }
+    ,[token])
+
     console.log(userInfo)
 
     return(
