@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import { api } from "../lib/api"
 import Hero from "@/components/Restaurant/Hero"
 import { ReservationForm } from "@/components/Restaurant/ReservationForm"
+import RestaurantLocation from "@/components/Restaurant/RestaurantLocation"
 
 const getRestaurant = async (id: string) => {
     const response = await api.get<RestaurantInfo[]>(`/restaurants/${id}`)
@@ -20,9 +21,8 @@ export default function Restaurant() {
     })
 
     return(
-        <>  
+        <section className="flex flex-col p-1 gap-2">  
         {
-
             typeof data !== "undefined" && (
                 <Hero 
                 pictures={data![0].pictures}
@@ -36,6 +36,7 @@ export default function Restaurant() {
                 </Hero> 
             )
         }
-        </>
+            <RestaurantLocation/>
+        </section>
     )
 };

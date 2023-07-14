@@ -13,7 +13,7 @@ interface RestaurantHeroProps extends RestaurantInfo{
 export default function Hero(RestaurantHero: RestaurantHeroProps) {
   return(
     <>
-        <section className="p-3 flex flex-col gap-2">
+        <section className=" flex flex-col gap-2">
             <div className="flex text-orange-orangePrimary gap-2 items-center ">
                 <h1 className="text-xl font-sans">{RestaurantHero.name}</h1>
                 <Button title="Ver Cardápio"/>

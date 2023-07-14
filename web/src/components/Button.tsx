@@ -1,11 +1,18 @@
 import { ButtonHTMLAttributes, forwardRef } from "react"
+import {twMerge} from "tailwind-merge"
+type ButtonProps = {
+    classes?: string
+}
+& ButtonHTMLAttributes<HTMLButtonElement >
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {}
-const Button = ({title, ...props}: ButtonProps) => {
+
+
+const Button = ({title, className='', ...props}: ButtonProps) => {
     return(
         <>
             <button
-             className="mt-1 text-white text-[12px] bg-orange-orangePrimary rounded-full p-1 hover:bg-orange-500 transition-all"
+             className={twMerge(`mt-1 text-white text-[12px] bg-orange-orangePrimary rounded-full p-1 hover:bg-orange-500 transition-all
+             ${className}`)}
             {...props}
             >
                 {title}
