@@ -6,8 +6,8 @@ import {useForm} from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import Link from "next/link"
 import { useRouter } from "next/navigation";
-import { GoogleOAuthProvider, GoogleLogin, useGoogleLogin } from "@react-oauth/google";
-import { api } from "@/app/lib/api";
+import { useGoogleLogin } from "@react-oauth/google";
+
 
 const schema = z.object({
     email: z.string().email({

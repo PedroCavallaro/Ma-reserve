@@ -95,12 +95,9 @@ export default function RegisterForm() {
                 <Input type="submit" value="Entrar" className="bg-orange-orangePrimary w-[80%] text-white p-1 cursor-pointer rounded-md hover:bg-orange-400 transition-all"/>
                 <p>ou</p>
                 <div className="w-[100%] items-center justify-center flex overflow-hidden">
-                    <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
-                        <GoogleLogin 
-                        text={"continue_with"}
-
-                        onSuccess={()=>console.log("oui")}/>
-                    </GoogleOAuthProvider>
+                    <GoogleLogin 
+                    text={"continue_with"}
+                    onSuccess={()=>console.log("oui")}/>
                 </div>
             </div>
 

@@ -33,7 +33,7 @@ export default function Home() {
     <div className='flex flex-col gap-2'>
       <SearchArea/>
       <Filters/>
-      <section className='flex flex-col justify-center'>
+      <section className='flex relative flex-col justify-center gap-4'>
         {
          
           data?.map((restaurant, index)=> {
