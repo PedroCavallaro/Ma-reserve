@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
 import { Montserrat as Mosterrat } from 'next/font/google'
 import Header from '../components/Header'
-import { ReactQueryProvider } from './ReactQueryProvider'
+import { Providers } from './providers/Providers'
 
 const inter = Inter({ subsets: ['latin'] })
 const monsterrat = Mosterrat({
@@ -26,9 +26,9 @@ export default function RootLayout({ children,}:
     <html lang="pt-br">
       <body className={`${inter.className} ${monsterrat.variable}`}>
         <Header/>        
-        <ReactQueryProvider>
+        <Providers>
           {children}
-        </ReactQueryProvider>
+        </Providers>
       </body>
       
     </html>
