@@ -9,7 +9,12 @@ export interface RestaurantInfo{
     },
     Comments?: [
         {
-            comment: string
+            comment: string,
+            User: {
+                name:string,
+                image: string
+            }
+            
         }
     ]
 }
