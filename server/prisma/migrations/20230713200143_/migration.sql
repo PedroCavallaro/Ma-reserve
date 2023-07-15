@@ -1,14 +1,4 @@
 -- CreateTable
-CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
-    "username" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
-    "picture" TEXT NOT NULL,
-
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Restaurant" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -17,8 +7,20 @@ CREATE TABLE "Restaurant" (
     "highlights" TEXT[],
     "latitude" TEXT NOT NULL,
     "longitude" TEXT NOT NULL,
+    "opening_time" INTEGER NOT NULL,
+    "closing_time" INTEGER NOT NULL,
+    "about" TEXT,
+    "foodTypeId" TEXT,
 
     CONSTRAINT "Restaurant_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "FoodType" (
+    "id" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+
+    CONSTRAINT "FoodType_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -36,21 +38,13 @@ CREATE TABLE "Menu" (
 CREATE TABLE "Reservation" (
     "id" TEXT NOT NULL,
     "guests" INTEGER NOT NULL,
+    "isApproved" BOOLEAN NOT NULL DEFAULT false,
+    "day" TIMESTAMP(3) NOT NULL,
+    "time" INTEGER NOT NULL,
     "restaurantId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "scheduleId" TEXT NOT NULL,
 
     CONSTRAINT "Reservation_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Schedule" (
-    "id" TEXT NOT NULL,
-    "day" TIMESTAMP(3) NOT NULL,
-    "time" TEXT NOT NULL,
-    "isReserved" BOOLEAN NOT NULL,
-
-    CONSTRAINT "Schedule_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -64,6 +58,23 @@ CREATE TABLE "Comments" (
     CONSTRAINT "Comments_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "name" TEXT,
+    "password" TEXT,
+    "email" TEXT NOT NULL,
+    "image" TEXT,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- AddForeignKey
+ALTER TABLE "Restaurant" ADD CONSTRAINT "Restaurant_foodTypeId_fkey" FOREIGN KEY ("foodTypeId") REFERENCES "FoodType"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
 -- AddForeignKey
 ALTER TABLE "Menu" ADD CONSTRAINT "Menu_restaurantId_fkey" FOREIGN KEY ("restaurantId") REFERENCES "Restaurant"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
@@ -72,9 +83,6 @@ ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_restaurantId_fkey" FOREIGN
 
 -- AddForeignKey
 ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_scheduleId_fkey" FOREIGN KEY ("scheduleId") REFERENCES "Schedule"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Comments" ADD CONSTRAINT "Comments_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

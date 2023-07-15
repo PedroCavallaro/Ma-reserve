@@ -23,7 +23,6 @@ export async function authRoutes(app: FastifyInstance){
         
         bcrypt.hash(password, 10, async (error, hash)=>{
             if(error) return reply.status(500).send()
-            console.log(hash + "ABCD")
             
             if(!user){
                 const newUser = await prisma.user.create({
@@ -55,6 +54,7 @@ export async function authRoutes(app: FastifyInstance){
            if(bcrypt.compareSync(password, user?.password!) ){      
                 const token = app.jwt.sign({
                     username: user?.name,
+                    email: user.email,
                     picture: user?.image
                 }, 
                 {
@@ -75,7 +75,6 @@ export async function authRoutes(app: FastifyInstance){
         }) 
         try{
             const {code} = schema.parse(req.body) 
-            console.log(code)
     
             const response = await axios.get(
                 "https://www.googleapis.com/oauth2/v3/userinfo",{
@@ -84,14 +83,97 @@ export async function authRoutes(app: FastifyInstance){
                     }
                 }
             )
-        
-            return response.data
-        
+
+            const responseSchema = z.object({
+                name: z.string(),
+                picture: z.string(),
+                email: z.string().email(),
+                sub: z.string()
+            })
+
+            const userInfo = responseSchema.parse(response.data)
+            const {name, picture, email, sub } = userInfo
+
+            let user = await prisma.user.findUnique({
+                where:{
+                    email
+                }
+            })
+
+            if(!user){
+                user = await prisma.user.create({
+                    data:{
+                        email,
+                        image: picture,
+                        name,
+                    }
+               })
+            }
+        console.log(user.image)
+        const token = app.jwt.sign({
+            name: user.name,
+            image: user.image
+        }, {
+            sub: user.id,
+            expiresIn: "30 days"
+        })
+
+        return reply.status(200).send({token})   
+
         }catch(err){
           
             return reply.status(401).send()
         
         }
 
+    })
+    app.post("/register/google", async (req, reply)=>{
+        const schema =   z.object({
+            code: z.string()
+        }) 
+        const {code} = schema.parse(req.body) 
+    
+        const response = await axios.get(
+            "https://www.googleapis.com/oauth2/v3/userinfo",{
+                headers: {
+                    "Authorization": `Bearer ${code}`
+                }
+            }
+        )
+
+        const responseSchema = z.object({
+            name: z.string(),
+            picture: z.string(),
+            email: z.string().email(),
+            sub: z.string()
+        })
+
+        const userInfo = responseSchema.parse(response.data)
+        const {name, picture, email, sub } = userInfo
+
+        let user = await prisma.user.findUnique({
+            where:{
+                email
+            }
+        })
+
+        if(!user){
+           user = await prisma.user.create({
+                data:{
+                    email,
+                    image: picture,
+                    name,
+                }
+           })
+        }
+        
+        const token = app.jwt.sign({
+            name: name,
+            image: picture
+        }, {
+            sub: user.id,
+            expiresIn: "30 days"
+        })
+        return token
     })
 }
