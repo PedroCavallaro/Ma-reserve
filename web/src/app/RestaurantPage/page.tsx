@@ -6,6 +6,7 @@ import Hero from "@/components/Restaurant/Hero"
 import { ReservationForm } from "@/components/Restaurant/ReservationForm"
 import RestaurantLocation from "@/components/Restaurant/RestaurantLocation"
 import CommentSection from "@/components/Restaurant/CommentSection"
+import { HighLights } from "@/components/Restaurant/HighLights"
 
 const getRestaurant = async (id: string) => {
     const response = await api.get<RestaurantInfo[]>(`/restaurants/${id}`)
@@ -23,7 +24,7 @@ export default function Restaurant() {
     console.log(data)
 
     return(
-        <section className="flex flex-col p-1 gap-2 h-[100rem]">  
+        <section className="flex flex-col p-1 gap-4 ">  
         {
             typeof data !== "undefined" && (
                 <>
@@ -34,16 +35,17 @@ export default function Restaurant() {
                     id={data![0].id!} 
                     highlights={data![0].highlights}
                     FoodType={data![0].FoodType}
-                    >
-                        <ReservationForm/>
-                    </Hero> 
-            
-            
-                <RestaurantLocation/>
-                
-                <CommentSection Comments={data![0].Comments}/>
-                </>
-            )
+                />
+        <section className="top-0 gap-2"> 
+            <ReservationForm>
+                <HighLights FoodType={data![0].FoodType} highlights={data![0].highlights}/>
+            </ReservationForm>
+        </section>           
+        <RestaurantLocation/>
+        
+        <CommentSection Comments={data![0].Comments}/>
+        </>
+        )
         }
         </section>
     )

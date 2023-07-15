@@ -21,7 +21,13 @@ export default function Logged(user: UserInfoProps) {
             )}
            
             {
-                    user.image? <img src={`${user.image!}`} referrerPolicy="no-referrer" className='h-7 w-7 lg:h-8 lg:w-8 rounded-full '/> :  <User size={23}/>
+                    user.image?
+                    <Image 
+                    src={`${user.image!}`} 
+                    height={200} width={200}
+                    alt="" referrerPolicy="no-referrer"
+                    className='h-7 w-7 lg:h-8 lg:w-8 rounded-full '/> 
+                    :  <User size={23}/>
             }
           
             
