@@ -5,7 +5,7 @@ import { api } from "../lib/api"
 import Hero from "@/components/Restaurant/Hero"
 import { ReservationForm } from "@/components/Restaurant/ReservationForm"
 import RestaurantLocation from "@/components/Restaurant/RestaurantLocation"
-import CommentSection from "@/components/Restaurant/CommentSection"
+import {CommentSection} from "@/components/Restaurant/CommentSection"
 import { HighLights } from "@/components/Restaurant/HighLights"
 
 const getRestaurant = async (id: string) => {
