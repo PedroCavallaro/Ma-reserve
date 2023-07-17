@@ -4,7 +4,7 @@ export interface RestaurantInfo{
     pictures: string[],
     highlights: string[],
     about: string,
-    FoodType: {
+    Gastronomy: {
         description: string
     },
     Comments?: [
@@ -13,8 +13,19 @@ export interface RestaurantInfo{
             User: {
                 name:string,
                 image: string
+            }    
+        }
+    ],
+    Menu?:[
+        {
+            description:string,
+            price: number,
+            pictures: [
+                ""
+            ],
+            FoodType: {
+                description: string
             }
-            
         }
     ]
 }

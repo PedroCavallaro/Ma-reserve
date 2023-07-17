@@ -6,7 +6,7 @@ export default function Hero(RestaurantHero: RestaurantInfo) {
   return(
     <>
         <section className=" flex flex-col gap-2">
-            <div className="flex text-orange-orangePrimary gap-2 items-center ">
+            <div className="flex text-orange-orangePrimary gap-3 items-center ">
                 <h1 className="text-xl font-sans">{RestaurantHero.name}</h1>
                 <Link href={"./RestaurantPage/Menu"}>
                     <Button title="Ver Cardápio"/>

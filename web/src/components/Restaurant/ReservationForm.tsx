@@ -31,7 +31,7 @@ export function ReservationForm({children} : {children: ReactNode}) {
         <form className="p-1 flex flex-col gap-3 ">
             <section className="flex gap-2">
                 {children}
-            <div className="flex flex-col p-1 shadow">
+            <div className="flex flex-col p-1 shadow gap-2">
             <p className="text-orange-orangePrimary">Reservar</p>
                 <div className="flex gap-2 ">
                     <label htmlFor=""

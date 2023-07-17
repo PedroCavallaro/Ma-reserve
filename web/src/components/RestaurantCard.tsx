@@ -13,7 +13,6 @@ const handleButtonClick = (id: string)=> {
 export default function RestaurantCard(RestaurantInfo: RestaurantInfo) {
     const router = useRouter()
 
-   
     return( 
         <div className="flex text-black w-[320px] shadow-lg min-h-[140px] gap-3 p-1">
             <Image src={`/${RestaurantInfo.pictures[0]}`} alt={RestaurantInfo.name} width={140} height={130}
@@ -25,7 +24,7 @@ export default function RestaurantCard(RestaurantInfo: RestaurantInfo) {
                         <div className="rounded-full shadow w-6 h-6 bg-orange-orangePrimary flex items-center justify-center">
                             <ChefHat size={15} color="#D9D9D9"/>
                         </div>
-                        <p>{RestaurantInfo.FoodType.description}</p>
+                        <p>{RestaurantInfo.Gastronomy.description}</p>
                     </div>
                     {
                         RestaurantInfo.highlights.map((highlight, index) => {

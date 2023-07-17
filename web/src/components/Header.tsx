@@ -19,7 +19,6 @@ export default function Header() {
     }
     ,[token])
 
-    console.log(userInfo)
 
     return(
         <header className='flex justify-between py-0 h-[60px] items-center container p-4 mx-auto shadow-lg'>

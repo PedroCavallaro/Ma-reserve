@@ -21,12 +21,10 @@ export default function Restaurant() {
         queryKey: ["Restaurant", id],
         queryFn: async () => await getRestaurant(id)
     })
-    console.log(data)
-
     return(
         <section className="flex flex-col p-1 gap-4 ">  
         {
-            typeof data !== "undefined" && (
+            !isLoading && (
                 <>
                     <Hero 
                     pictures={data![0].pictures}
@@ -34,18 +32,18 @@ export default function Restaurant() {
                     about={data![0].about}
                     id={data![0].id!} 
                     highlights={data![0].highlights}
-                    FoodType={data![0].FoodType}
+                    Gastronomy={data![0].Gastronomy}
                 />
         <section className="top-0 gap-2"> 
             <ReservationForm>
-                <HighLights FoodType={data![0].FoodType} highlights={data![0].highlights}/>
+                <HighLights Gastronomy={data![0].Gastronomy} highlights={data![0].highlights}/>
             </ReservationForm>
         </section>           
         <RestaurantLocation/>
         
         <CommentSection Comments={data![0].Comments}/>
         </>
-        )
+            )
         }
         </section>
     )

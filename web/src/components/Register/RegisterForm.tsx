@@ -97,7 +97,7 @@ export default function RegisterForm() {
                 <div className="w-[100%] items-center justify-center flex overflow-hidden">
                     <GoogleLogin 
                     text={"continue_with"}
-                    onSuccess={()=>console.log("oui")}/>
+                        onSuccess={()=>console.log("oui")}/>
                 </div>
             </div>
 

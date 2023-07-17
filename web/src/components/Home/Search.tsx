@@ -11,7 +11,7 @@ export default function SearchArea() {
                 <button className="flex w-14 lg:w-auto justify-center items-center gap-2 bg-orange-orangePrimary rounded-br-2xl rounded-tr-2xl p-1
                 transition-all hover:bg-orange-500" >
                     <Search color="#ffff" />
-                    <p className="lg:flex hidden text-white">Buscar</p>
+                    <p className="lg:flex hidden text-white text-sm">Buscar</p>
                 </button>
             </div>
         </div>

@@ -1,23 +1,13 @@
 "use client"
-import { useMemo, useState } from 'react'
 import SearchArea from '../components/Home/Search'
 import Filters from '@/components/Home/Filters'
 import { api } from './lib/api'
 import { useQuery } from '@tanstack/react-query'
 import RestaurantCard from '@/components/RestaurantCard'
+import { RestaurantInfo } from '@/interfaces'
 
-type Restaurant ={
-  id: string,
-  name: string,
-  pictures: string[],
-  highlights: string[],
-  about: string,
-  FoodType: {
-    description: string
-  }
-}
 const getRestaurants = async () => {
-  const response = await api.get<Restaurant[]>("/restaurants")
+  const response = await api.get<RestaurantInfo[]>("/restaurants")
 
   return response.data
 }
@@ -27,8 +17,8 @@ export default function Home() {
     queryKey: ["restaurants"],
     queryFn: getRestaurants
   })
-
-    console.log(navigator.geolocation.getCurrentPosition((pos) => console.log(pos)))
+    console.log(data)
+    // console.log(navigator.geolocation.getCurrentPosition((pos) => console.log(pos)))
   return (
     <div className='flex flex-col gap-2'>
       <SearchArea/>
@@ -44,7 +34,7 @@ export default function Home() {
                 highlights={restaurant.highlights}
                 pictures={restaurant.pictures}
                 name={restaurant.name}
-                FoodType={restaurant.FoodType}
+                Gastronomy={restaurant.Gastronomy}
                 about={restaurant.about}/>
             )
           })
