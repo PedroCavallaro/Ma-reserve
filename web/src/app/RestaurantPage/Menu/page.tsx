@@ -20,7 +20,6 @@ export default function Menu() {
     
     if(typeof data !== "undefined") {
         const {Menu} = data[0]
-        console.log(data[0])
 
         return(
             <main className="flex flex-col gap-2">

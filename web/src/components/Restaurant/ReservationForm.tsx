@@ -7,7 +7,7 @@ import { ReactNode } from "react"
 
 const schema = z.object({
     date: z.coerce.date({
-
+        required_error: "Campo obrigatório"
     }),
     guests: z.coerce.number({
         invalid_type_error: "Apenas numeros"
@@ -37,7 +37,9 @@ export function ReservationForm({children} : {children: ReactNode}) {
                     <label htmlFor=""
                     >
                         <p className="text-sm text-orange-orangePrimary">Data da reserva</p>
-                        <Input type="date" className="text-sm "/>
+                        <Input type="date" className="text-sm "
+                          {...register("date")}
+                          />
                     </label>
                     <label htmlFor=""
                     className="text-sm">
@@ -52,6 +54,7 @@ export function ReservationForm({children} : {children: ReactNode}) {
                     <label htmlFor="">
                         <p className="text-sm text-orange-orangePrimary">Horário de chegada</p>
                         <Input type="text" 
+                      
                         maxLength={5}
                         placeholder="19:30"
                         className="w-24 border-2 p-1 rounded-sm border-orange-orangePrimary" />

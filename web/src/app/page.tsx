@@ -17,13 +17,12 @@ export default function Home() {
     queryKey: ["restaurants"],
     queryFn: getRestaurants
   })
-    console.log(data)
-    // console.log(navigator.geolocation.getCurrentPosition((pos) => console.log(pos)))
+    console.log(navigator.geolocation.getCurrentPosition((pos) => console.log(pos)))
   return (
     <div className='flex flex-col gap-2'>
       <SearchArea/>
       <Filters/>
-      <section className='flex relative flex-col justify-center gap-4'>
+      <section className='flex relative flex-col justify-center gap-4 p-2'>
         {
          
           data?.map((restaurant, index)=> {
