@@ -1,10 +1,24 @@
-import { forwardRef, ComponentProps, ButtonHTMLAttributes } from "react";
+import { forwardRef, ButtonHTMLAttributes } from "react";
+import { twMerge } from "tailwind-merge";
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & { text: string };
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
-
-// eslint-disable-next-line react/display-name
-// const Button = forwardRef<ButtonProps, HTMLButtonElement>(
-//     ({ className = "" }) => {
-// return <>* <button className={}/> </>;
-//     }
-// );
+//eslint-disable-next-line react/display-name
+export const Button = ({
+    className = "",
+    type = "button",
+    text = "",
+    ...props
+}: ButtonProps) => {
+    return (
+        <>
+            <button
+                className={twMerge(
+                    `text-white bg-orange-400 rounded-md h-10 ${className}}`
+                )}
+                type={type}
+            >
+                {text}
+            </button>
+        </>
+    );
+};

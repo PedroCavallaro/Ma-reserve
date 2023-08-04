@@ -5,7 +5,7 @@ export default function Search() {
         <section className="flex flex-col justify-center shadow items-center gap-2 h-[12rem]">
             <h2 className="flex gap-2 text-lg">
                 Encontrar{" "}
-                <p className="text-orange-100 font-semibold">restaurantes</p>{" "}
+                <p className="text-orange-400 font-semibold">restaurantes</p>{" "}
             </h2>
             <label
                 htmlFor=""
