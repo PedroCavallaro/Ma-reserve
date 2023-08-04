@@ -10,6 +10,11 @@ module.exports = {
             fontFamily: {
                 sans: "var(--font-roboto)",
             },
+            colors: {
+                orange: {
+                    400: "#E5881B",
+                },
+            },
         },
     },
     plugins: [],
