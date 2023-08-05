@@ -8,14 +8,14 @@ import Link from "next/link";
 import { useContext } from "react";
 import { AuthContext } from "@/app/contexts/AuthContext";
 import { z } from "zod";
-import { routes } from "@/app/constants/constants";
 
 const schema = z.object({
     email: z.string().email({ message: "Email deve ser válido" }),
     password: z.string().min(8, { message: "Minimo 8 caractéres" }),
+    name: z.string().min(3, "O nome deve ser maior"),
 });
 type FormData = z.infer<typeof schema>;
-export default function LoginForm() {
+export default function RegisterForm() {
     const {
         handleSubmit,
         register,
@@ -24,13 +24,28 @@ export default function LoginForm() {
         mode: "onBlur",
         resolver: zodResolver(schema),
     });
-    const { sigIn } = useContext(AuthContext);
+
+    const { registerUser } = useContext(AuthContext);
 
     return (
-        <form className="bg-white flex flex-col gap-4 px-3 w-[20rem] lg:w-[30rem] py-6 rounded-md">
+        <form
+            onSubmit={handleSubmit(async ({ email, name, password }) =>
+                registerUser({ email, name, password })
+            )}
+            className="bg-white flex flex-col gap-4 px-3 w-[20rem] lg:w-[30rem] py-6 rounded-md"
+        >
             <Logo />
-            <h2 className="text-center">Faça seu login</h2>
+            <h2 className="text-center">Cadastre-se</h2>
             <div className="flex  flex-col gap-3 px-2">
+                <label htmlFor="" className="flex  flex-col">
+                    <Input
+                        {...register("name")}
+                        label="Nome"
+                        errors={errors.name?.message}
+                        className="shadow-md"
+                        placeholder="Nos diga seu nome"
+                    />
+                </label>
                 <label htmlFor="" className="flex  flex-col">
                     <Input
                         {...register("email")}
@@ -51,24 +66,12 @@ export default function LoginForm() {
                         placeholder="minimo 8 caracteres"
                     />
                 </label>
-                <Button text="Entrar" type="submit" />
-                <Link href={"/"} className="text-right text-sm mr-2 ">
-                    Esqueceu sua senha?
-                </Link>
-                <p className="text-orange-400 text-center ">Continuar com</p>
-                <div className="flex items-center gap-3 justify-center">
-                    <div className="rounded-full w-12 h-12 bg-gray-600"></div>
-                    <div className="rounded-full w-12 h-12 bg-gray-600"></div>
-                </div>
-                <p className="text-orange-400 text-center">
-                    Não tem uma conta?
-                </p>
-                <Link href={routes.REGISTER} className="flex ">
-                    <Button
-                        text="Cadastre-se"
-                        type="button"
-                        className=" w-full"
-                    />
+                <Button text={`Cadastrar`} type="submit" />
+                <Link
+                    href={"/Login"}
+                    className="text-right text-sm mr-2 text-orange-400"
+                >
+                    Voltar para o login
                 </Link>
             </div>
         </form>

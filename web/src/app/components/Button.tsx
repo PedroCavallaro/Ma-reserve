@@ -13,7 +13,7 @@ export const Button = ({
         <>
             <button
                 className={twMerge(
-                    `text-white bg-orange-400 rounded-md h-10 ${className}}`
+                    `text-white bg-orange-400 rounded-md h-10 ${className}`
                 )}
                 type={type}
             >
