@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useContext } from "react";
 import { AuthContext } from "@/app/contexts/AuthContext";
 import { z } from "zod";
+import ErrorSpan from "../ErrorSpan";
 
 const schema = z.object({
     email: z.string().email({ message: "Email deve ser válido" }),
@@ -25,7 +26,7 @@ export default function RegisterForm() {
         resolver: zodResolver(schema),
     });
 
-    const { registerUser } = useContext(AuthContext);
+    const { registerUser, authState } = useContext(AuthContext);
 
     return (
         <form
@@ -55,6 +56,9 @@ export default function RegisterForm() {
                         className="shadow-md"
                         placeholder="exemplo@email.com"
                     />
+                    {authState.error && (
+                        <ErrorSpan text="Email já está cadastrado" />
+                    )}
                 </label>
                 <label htmlFor="" className="flex  flex-col">
                     <Input

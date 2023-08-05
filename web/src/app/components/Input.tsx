@@ -1,5 +1,6 @@
 import { InputHTMLAttributes, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
+import ErrorSpan from "./ErrorSpan";
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     label?: string;
     errors?: string;
@@ -23,7 +24,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                     ref={ref}
                     {...props}
                 />
-                {errors && <p className="text-red-500 text-sm">{errors}</p>}
+                {errors && <ErrorSpan text={errors} />}
             </>
         );
     }

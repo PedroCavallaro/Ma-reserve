@@ -9,6 +9,7 @@ import { useContext } from "react";
 import { AuthContext } from "@/app/contexts/AuthContext";
 import { z } from "zod";
 import { routes } from "@/app/constants/constants";
+import ErrorSpan from "../ErrorSpan";
 
 const schema = z.object({
     email: z.string().email({ message: "Email deve ser válido" }),
@@ -24,10 +25,15 @@ export default function LoginForm() {
         mode: "onBlur",
         resolver: zodResolver(schema),
     });
-    const { sigIn } = useContext(AuthContext);
-
+    const { authState, sigIn } = useContext(AuthContext);
+    console.log(authState);
     return (
-        <form className="bg-white flex flex-col gap-4 px-3 w-[20rem] lg:w-[30rem] py-6 rounded-md">
+        <form
+            onSubmit={handleSubmit(({ email, password }) =>
+                sigIn({ email, password })
+            )}
+            className="bg-white flex flex-col gap-4 px-3 w-[20rem] lg:w-[30rem] py-6 rounded-md"
+        >
             <Logo />
             <h2 className="text-center">Faça seu login</h2>
             <div className="flex  flex-col gap-3 px-2">
@@ -50,6 +56,7 @@ export default function LoginForm() {
                         className="shadow-md"
                         placeholder="minimo 8 caracteres"
                     />
+                    {authState.error && <ErrorSpan text="Senha incorreta" />}
                 </label>
                 <Button text="Entrar" type="submit" />
                 <Link href={"/"} className="text-right text-sm mr-2 ">
