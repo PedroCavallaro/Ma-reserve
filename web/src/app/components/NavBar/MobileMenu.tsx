@@ -9,26 +9,49 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ handleMenu, isAuth }: MobileMenuProps) {
+    console.log(isAuth);
     return (
         <>
             <div className="flex items-center justify-between z-20">
                 <Logo />
-                <button>
+                <button onClick={() => handleMenu()}>
                     <AiOutlineClose />
                 </button>
             </div>
-            <div className="flex items-center justify-center flex-col mt-4">
+            <div className="flex items-center justify-center flex-col mt-4 text-lg">
                 {isAuth ? (
                     <>
-                        <Link href={"/Login"}>Fazer Login</Link>
-                        <Link href={"/Register"}>Cadastre-se</Link>
-                        <Link href={"/"}>Para colaboradores</Link>
+                        <Link onClick={() => handleMenu()} href={"/Login"}>
+                            Minha conta
+                        </Link>
+                        <Link onClick={() => handleMenu()} href={"/Login"}>
+                            Minhas Reservas
+                        </Link>
+                        <Link onClick={() => handleMenu()} href={"/Login"}>
+                            Itens salvos
+                        </Link>
+                        <Link
+                            onClick={() => handleMenu()}
+                            href={"/Login"}
+                            className="text-red-500"
+                        >
+                            Sair
+                        </Link>
                     </>
                 ) : (
                     <>
-                        <Link href={"/Login"}>Fazer Login</Link>
-                        <Link href={"/Login"}>Fazer Login</Link>
-                        <Link href={"/Login"}>Fazer Login</Link>
+                        <Link onClick={() => handleMenu()} href={routes.LOGIN}>
+                            Fazer Login
+                        </Link>
+                        <Link
+                            onClick={() => handleMenu()}
+                            href={routes.REGISTER}
+                        >
+                            Cadastre-se
+                        </Link>
+                        <Link onClick={() => handleMenu()} href={"/"}>
+                            Para colaboradores
+                        </Link>
                     </>
                 )}
             </div>

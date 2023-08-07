@@ -2,6 +2,8 @@ import { ReactNode, createContext, useReducer, useState } from "react";
 import { RegisterData, SignInData } from "../types";
 import { api } from "../lib/api";
 import { FETCH_INIT_STATE, fetchReducer } from "../util/fetchReducer";
+import { setCookie, parseCookies } from "nookies";
+import nookies from "nookies";
 
 type AuthContextType = {
     isAuth: boolean;
@@ -22,7 +24,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             })
             .then((res) => {
                 dispatch({ type: 1 });
-                localStorage.setItem("Auth", JSON.stringify(res.data));
+                const { token } = res.data;
+                setCookie(null, "token", token, {
+                    maxAge: 60 * 60 * 24 * 30,
+                    path: "/",
+                });
             })
             .catch((err) => dispatch({ type: 2 }));
     }
@@ -41,7 +47,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             .catch((err) => dispatch({ type: 2 }));
     }
     const [authState, dispatch] = useReducer(fetchReducer, FETCH_INIT_STATE);
-    const isAuth = false;
+    const { token } = parseCookies();
+
+    const isAuth = token ? true : false;
 
     return (
         <AuthContext.Provider

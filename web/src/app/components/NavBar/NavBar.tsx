@@ -11,15 +11,18 @@ export default function NavBar() {
     }
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { isAuth } = useContext(AuthContext);
+    console.log(isAuth);
     return (
-        <nav className="md:w-full lg:w-full  overflow-hidden p-2 h-[70px] shadow-md flex justify-between items-center ">
+        <nav className="overflow-hidden p-2 h-[70px] shadow-md flex justify-between items-center ">
             <Logo />
             <UserSection handleMenu={handleMenu} />
-            {isMenuOpen && (
-                <div className="absolute w-full top-2 px-3 z-50 bg-white h-full">
-                    <MobileMenu handleMenu={handleMenu} isAuth={isAuth} />
-                </div>
-            )}
+
+            <div
+                data-menuopen={isMenuOpen}
+                className="fixed w-screen top-2 -right-[40rem] data-[menuopen=true]:-right-0 transition-all  px-2 z-50 bg-white h-full"
+            >
+                <MobileMenu handleMenu={handleMenu} isAuth={isAuth} />
+            </div>
         </nav>
     );
 }
