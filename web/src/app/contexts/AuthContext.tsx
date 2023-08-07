@@ -1,20 +1,30 @@
-import { ReactNode, createContext, useReducer, useState } from "react";
+import {
+    ReactNode,
+    createContext,
+    useEffect,
+    useReducer,
+    useState,
+} from "react";
 import { RegisterData, SignInData } from "../types";
 import { api } from "../lib/api";
-import { FETCH_INIT_STATE, fetchReducer } from "../util/fetchReducer";
-import { setCookie, parseCookies } from "nookies";
-import nookies from "nookies";
+import { FETCH_INIT_STATE, fetchReducer } from "../reducers/fetchReducer";
+import { setCookie, parseCookies, destroyCookie } from "nookies";
+import { useRouter } from "next/navigation";
+import { routes } from "../constants/constants";
+import { setToken } from "../services/auth";
 
 type AuthContextType = {
     isAuth: boolean;
     sigIn: (data: SignInData) => void;
     registerUser: (data: RegisterData) => void;
+    logOut: () => void;
     authState: typeof FETCH_INIT_STATE;
 };
 
 export const AuthContext = createContext({} as AuthContextType);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
+    const router = useRouter();
     async function sigIn({ email, password }: SignInData) {
         dispatch({ type: 0 });
         await api
@@ -25,10 +35,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             .then((res) => {
                 dispatch({ type: 1 });
                 const { token } = res.data;
-                setCookie(null, "token", token, {
-                    maxAge: 60 * 60 * 24 * 30,
-                    path: "/",
-                });
+
+                setToken(token);
+                router.push("/");
             })
             .catch((err) => dispatch({ type: 2 }));
     }
@@ -42,18 +51,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             })
             .then((res) => {
                 dispatch({ type: 1 });
-                localStorage.setItem("Auth", JSON.stringify(res.data));
+                const { token } = res.data;
+                console.log(res.data);
+                setToken(token);
+                router.push("/");
             })
             .catch((err) => dispatch({ type: 2 }));
     }
+    function logOut() {
+        destroyCookie(null, "token");
+        router.refresh();
+        router.push(routes.LOGIN);
+    }
     const [authState, dispatch] = useReducer(fetchReducer, FETCH_INIT_STATE);
+
     const { token } = parseCookies();
 
     const isAuth = token ? true : false;
-
     return (
         <AuthContext.Provider
-            value={{ isAuth, sigIn, registerUser, authState }}
+            value={{ isAuth, sigIn, registerUser, authState, logOut }}
         >
             {children}
         </AuthContext.Provider>

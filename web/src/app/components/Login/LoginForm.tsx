@@ -10,6 +10,7 @@ import { AuthContext } from "@/app/contexts/AuthContext";
 import { z } from "zod";
 import { routes } from "@/app/constants/constants";
 import ErrorSpan from "../ErrorSpan";
+import SocialLogin from "./SocialLogin";
 
 const schema = z.object({
     email: z.string().email({ message: "Email deve ser válido" }),
@@ -63,10 +64,7 @@ export default function LoginForm() {
                     Esqueceu sua senha?
                 </Link>
                 <p className="text-orange-400 text-center ">Continuar com</p>
-                <div className="flex items-center gap-3 justify-center">
-                    <div className="rounded-full w-12 h-12 bg-gray-600"></div>
-                    <div className="rounded-full w-12 h-12 bg-gray-600"></div>
-                </div>
+                <SocialLogin />
                 <p className="text-orange-400 text-center">
                     Não tem uma conta?
                 </p>

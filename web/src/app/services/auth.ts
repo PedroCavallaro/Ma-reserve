@@ -1,15 +1,28 @@
 import jwtDecode from "jwt-decode";
-import { parseCookies } from "nookies";
+import { parseCookies, setCookie } from "nookies";
 
 type User = {
     name: string;
+    sub: string;
     image?: string;
 };
 
-export const getUser = () => {
+export const getUser = (): User => {
+    const token = getToken();
+    const user: User = jwtDecode(token);
+    return user;
+};
+export const getToken = () => {
     const { token } = parseCookies();
-    let user = "";
-    if (token) {
-        user = jwtDecode(token);
+    if (!token) {
+        return "";
     }
+    return token as string;
+};
+
+export const setToken = (token: string) => {
+    setCookie(null, "token", token, {
+        maxAge: 60 * 60 * 24 * 30,
+        path: "/",
+    });
 };

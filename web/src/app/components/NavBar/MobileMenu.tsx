@@ -6,9 +6,14 @@ import { routes } from "@/app/constants/constants";
 interface MobileMenuProps {
     isAuth: boolean;
     handleMenu: () => void;
+    logOut: () => void;
 }
 
-export default function MobileMenu({ handleMenu, isAuth }: MobileMenuProps) {
+export default function MobileMenu({
+    handleMenu,
+    isAuth,
+    logOut,
+}: MobileMenuProps) {
     console.log(isAuth);
     return (
         <>
@@ -31,7 +36,10 @@ export default function MobileMenu({ handleMenu, isAuth }: MobileMenuProps) {
                             Itens salvos
                         </Link>
                         <Link
-                            onClick={() => handleMenu()}
+                            onClick={() => {
+                                logOut();
+                                handleMenu();
+                            }}
                             href={"/Login"}
                             className="text-red-500"
                         >
