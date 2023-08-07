@@ -26,7 +26,7 @@ export default function LoginForm() {
         resolver: zodResolver(schema),
     });
     const { authState, sigIn } = useContext(AuthContext);
-    console.log(authState);
+    console.table(authState);
     return (
         <form
             onSubmit={handleSubmit(({ email, password }) =>
