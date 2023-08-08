@@ -1,4 +1,4 @@
-import { forwardRef, ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes } from "react";
 import { twMerge } from "tailwind-merge";
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & { text: string };
 
@@ -15,6 +15,7 @@ export const Button = ({
                 className={twMerge(
                     `text-white bg-orange-400 rounded-md h-10 ${className}`
                 )}
+                {...props}
                 type={type}
             >
                 {text}

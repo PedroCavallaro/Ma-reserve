@@ -18,12 +18,12 @@ export default function MobileMenu({
     return (
         <>
             <div className="flex items-center justify-between z-20">
-                <Logo />
+                <Logo handleMenu={handleMenu} />
                 <button onClick={() => handleMenu()}>
                     <AiOutlineClose />
                 </button>
             </div>
-            <div className="flex items-center justify-center flex-col mt-4 text-lg">
+            <div className="flex items-center justify-center flex-col text-lg">
                 {isAuth ? (
                     <>
                         <Link onClick={() => handleMenu()} href={"/Login"}>

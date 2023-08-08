@@ -1,14 +1,13 @@
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { PiHouseBold } from "react-icons/pi";
+
 export default function Search() {
     return (
-        <section className="flex flex-col justify-center shadow items-center gap-2 h-[14rem]">
+        <section className="flex flex-col justify-center shadow items-center gap-2 h-[12.5rem]">
             <h2 className="flex gap-2 text-lg">
                 Encontrar
-                <p className="text-orange-400 font-semibold">
-                    restaurantes
-                </p>{" "}
+                <p className="text-orange-400 font-semibold">restaurantes</p>
             </h2>
             <form action="" className="flex flex-col gap-2">
                 <label

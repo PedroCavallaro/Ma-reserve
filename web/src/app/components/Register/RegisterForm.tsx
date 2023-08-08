@@ -78,6 +78,10 @@ export default function RegisterForm() {
                     Voltar para o login
                 </Link>
             </div>
+            <div className="flex flex-col text-sm items-center text-zinc-500">
+                <Link href={"/"}>Termos de Uso</Link>
+                <Link href={"/"}>Politíca de Privacidade </Link>
+            </div>
         </form>
     );
 }

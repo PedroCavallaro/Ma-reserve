@@ -1,6 +1,9 @@
 import Link from "next/link";
 
-export default function Logo() {
+interface LogoProps {
+    handleMenu?: () => void;
+}
+export default function Logo({ handleMenu }: LogoProps) {
     return (
         <div className="flex">
             <Link href={`/`} className="flex items-center gap-2">

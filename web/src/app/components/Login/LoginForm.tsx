@@ -76,6 +76,10 @@ export default function LoginForm() {
                     />
                 </Link>
             </div>
+            <div className="flex flex-col text-sm items-center text-zinc-500">
+                <Link href={"/"}>Termos e condições</Link>
+                <Link href={"/"}>Politíca de Privacidade </Link>
+            </div>
         </form>
     );
 }

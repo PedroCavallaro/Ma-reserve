@@ -5,10 +5,11 @@ import { getUser } from "@/app/services/auth";
 import image from "next/image";
 interface UserSectionProps {
     handleMenu: () => void;
-    isAuth: () => boolean;
+    isAuth: boolean;
 }
 
 export default function UserSection({ handleMenu, isAuth }: UserSectionProps) {
+   
     return (
         <div className="flex gap-3 rounded-full shadow-md p-2 mx-2">
             <PiUserCircleFill size={30} />

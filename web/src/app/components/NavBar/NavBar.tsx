@@ -14,12 +14,12 @@ export default function NavBar() {
 
     return (
         <nav className="overflow-hidden p-2 h-[70px] shadow-md flex justify-between items-center ">
-            <Logo />
+            <Logo handleMenu={handleMenu} />
             <UserSection handleMenu={handleMenu} isAuth={isAuth} />
 
             <div
                 data-menuopen={isMenuOpen}
-                className="fixed w-screen top-2 -right-[40rem] data-[menuopen=true]:-right-0 transition-all  px-2 z-50 bg-white h-full"
+                className="fixed flex flex-col gap-6 w-screen top-2 -right-[40rem] data-[menuopen=true]:-right-0 transition-all  px-2 z-50 bg-white h-full"
             >
                 <MobileMenu
                     handleMenu={handleMenu}
