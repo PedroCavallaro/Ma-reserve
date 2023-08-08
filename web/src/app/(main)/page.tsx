@@ -1,16 +1,25 @@
-import Image from "next/image";
+"use client";
 import Search from "../components/Home/Search";
 import GastronomyFilter from "../components/Home/GastronomyFilter";
-import InterestSection from "../components/Home/InterestSection";
-import ReserveAgain from "../components/Home/ReserveAgain";
+import CircleSection from "../components/Home/CircleSection";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
+import CardSection from "../components/Home/CardSection";
 
 export default function Home() {
+    const { isAuth } = useContext(AuthContext);
     return (
         <main className="flex flex-col gap-4">
             <Search />
             <GastronomyFilter />
-            <InterestSection />
-            <ReserveAgain />
+            {isAuth ? (
+                <>
+                    <CardSection tittle="Talvez te interesse" />
+                    <CircleSection tittle="Reserve novamente" />
+                </>
+            ) : (
+                ""
+            )}
         </main>
     );
 }

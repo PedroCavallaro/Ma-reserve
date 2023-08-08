@@ -2,12 +2,14 @@
 import { useRestaurant } from "@/app/hooks/useRestaurant";
 import RestaurantCard from "../RestaurantCard";
 import Section from "../Section";
+import { text } from "stream/consumers";
 
-export default function InterestSection() {
+export default function CardSection({ tittle }: { tittle: string }) {
     const { restaurant } = useRestaurant();
 
     return (
-        <Section text="Talvez te Interesse">
+        <section className="flex flex-col gap-1 p-2 relative">
+            <p className="text-orange-400 font-semibold ">{tittle}</p>
             <div className="flex overflow-scroll relative gap-2 py-3">
                 {restaurant?.map(
                     (
@@ -28,6 +30,6 @@ export default function InterestSection() {
                     }
                 )}
             </div>
-        </Section>
+        </section>
     );
 }
