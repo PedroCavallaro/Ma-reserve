@@ -1,11 +1,21 @@
 interface RestaurantCardProps {
+    id: string;
     name: string;
-    image: string;
-    highlights: Array<string>;
-    gastronomy: string;
+    coverImage: string;
+    highlights: string[];
     about: string;
+    Gastronomy: {
+        description: string;
+    };
 }
-export default function RestaurantCard() {
+export default function RestaurantCard({
+    id,
+    name,
+    about,
+    coverImage,
+    highlights,
+    Gastronomy,
+}: RestaurantCardProps) {
     return (
         <button>
             <div></div>

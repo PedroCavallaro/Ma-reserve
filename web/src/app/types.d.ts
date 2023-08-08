@@ -15,6 +15,7 @@ export type RestaurantInfo = {
     id: string;
     name: string;
     pictures: string[];
+    coverImage: string;
     highlights: string[];
     about: string;
     Gastronomy: {
