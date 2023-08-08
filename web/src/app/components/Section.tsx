@@ -8,7 +8,7 @@ export default function HomeSection({
     text: string;
 }) {
     return (
-        <section className="flex flex-col p-1">
+        <section className="flex flex-col gap-1 p-1 relative">
             <p className="text-orange-400 font-semibold ">{text}</p>
             {children}
         </section>

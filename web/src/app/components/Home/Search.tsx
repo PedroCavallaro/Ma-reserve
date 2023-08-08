@@ -1,6 +1,6 @@
 import { Button } from "../Button";
 import { Input } from "../Input";
-import { PiHouseBold } from "react-icons/pi";
+import { LuChefHat } from "react-icons/lu";
 
 export default function Search() {
     return (
@@ -14,7 +14,7 @@ export default function Search() {
                     htmlFor=""
                     className="flex relative shadow w-[20rem] h-12 rounded-md p-2 gap-1 items-center"
                 >
-                    <PiHouseBold size={25} color={"#E5881B"} />
+                    <LuChefHat size={25} color={"#E5881B"} />
                     <Input
                         type="text"
                         placeholder="Restaurante..."

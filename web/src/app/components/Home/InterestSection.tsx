@@ -8,24 +8,22 @@ export default function InterestSection() {
 
     return (
         <Section text="Talvez te Interesse">
-            <div className="flex gap-3">
+            <div className="flex overflow-scroll relative gap-2 py-3">
                 {restaurant?.map(
                     (
                         { id, name, about, coverImage, highlights, Gastronomy },
                         index
                     ) => {
                         return (
-                            <>
-                                <RestaurantCard
-                                    key={index.toString()}
-                                    id={id}
-                                    name={name}
-                                    about={about}
-                                    coverImage={coverImage}
-                                    highlights={highlights}
-                                    Gastronomy={Gastronomy}
-                                />
-                            </>
+                            <RestaurantCard
+                                key={index.toString()}
+                                id={id}
+                                name={name}
+                                about={about}
+                                coverImage={coverImage}
+                                highlights={highlights}
+                                Gastronomy={Gastronomy}
+                            />
                         );
                     }
                 )}
