@@ -8,7 +8,7 @@ import {
 import { RegisterData, SignInData } from "../types";
 import { api } from "../lib/api";
 import { FETCH_INIT_STATE, fetchReducer } from "../reducers/fetchReducer";
-import { setCookie, parseCookies, destroyCookie } from "nookies";
+import { parseCookies, destroyCookie } from "nookies";
 import { useRouter } from "next/navigation";
 import { routes } from "../constants/constants";
 import { setToken } from "../services/auth";
@@ -63,11 +63,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         router.refresh();
         router.push(routes.LOGIN);
     }
+
     const [authState, dispatch] = useReducer(fetchReducer, FETCH_INIT_STATE);
-
     const { token } = parseCookies();
+    const [isAuth, setIsAuth] = useState(false);
 
-    const isAuth = token ? true : false;
+    useEffect(() => {
+        setIsAuth(token ? true : false);
+    }, [token]);
+
     return (
         <AuthContext.Provider
             value={{ isAuth, sigIn, registerUser, authState, logOut }}

@@ -1,10 +1,23 @@
 import { useGoogleLogin, GoogleLogin } from "@react-oauth/google";
 import { PiGoogleLogo } from "react-icons/pi";
-
+import { useRouter } from "next/navigation";
+import { routes } from "@/app/constants/constants";
+import { api } from "@/app/lib/api";
+import { setToken } from "@/app/services/auth";
 export default function GoogleButton() {
+    const router = useRouter();
     const login = useGoogleLogin({
         onSuccess: async (token) => {
             const { access_token } = token;
+            await api
+                .post("/login/google", {
+                    code: access_token,
+                })
+                .then((res) => {
+                    const { token } = res.data;
+                    setToken(token);
+                    router.push(routes.HOME);
+                });
         },
     });
     return (

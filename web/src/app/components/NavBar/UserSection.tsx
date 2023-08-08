@@ -5,7 +5,7 @@ import { getUser } from "@/app/services/auth";
 import image from "next/image";
 interface UserSectionProps {
     handleMenu: () => void;
-    isAuth: boolean;
+    isAuth: () => boolean;
 }
 
 export default function UserSection({ handleMenu, isAuth }: UserSectionProps) {

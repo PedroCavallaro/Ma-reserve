@@ -2,6 +2,7 @@ import Link from "next/link";
 import Logo from "../Logo";
 import { AiOutlineClose } from "react-icons/ai";
 import { routes } from "@/app/constants/constants";
+import { useState, useEffect } from "react";
 
 interface MobileMenuProps {
     isAuth: boolean;
@@ -14,7 +15,6 @@ export default function MobileMenu({
     isAuth,
     logOut,
 }: MobileMenuProps) {
-    console.log(isAuth);
     return (
         <>
             <div className="flex items-center justify-between z-20">
