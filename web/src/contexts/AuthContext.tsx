@@ -5,13 +5,13 @@ import {
     useReducer,
     useState,
 } from "react";
-import { RegisterData, SignInData } from "../types";
 import { api } from "../lib/api";
 import { FETCH_INIT_STATE, fetchReducer } from "../reducers/fetchReducer";
 import { parseCookies, destroyCookie } from "nookies";
 import { useRouter } from "next/navigation";
 import { routes } from "../constants/constants";
 import { setToken } from "../services/auth";
+import { RegisterData, SignInData } from "@/@types/types";
 
 type AuthContextType = {
     isAuth: boolean;

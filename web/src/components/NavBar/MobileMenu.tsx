@@ -1,8 +1,7 @@
 import Link from "next/link";
 import Logo from "../Logo";
 import { AiOutlineClose } from "react-icons/ai";
-import { routes } from "@/app/constants/constants";
-import { useState, useEffect } from "react";
+import { routes } from "@/constants/constants";
 
 interface MobileMenuProps {
     isAuth: boolean;
@@ -23,7 +22,7 @@ export default function MobileMenu({
                     <AiOutlineClose />
                 </button>
             </div>
-            <div className="flex items-center justify-center flex-col text-lg">
+            <nav className="flex items-center justify-center flex-col text-lg">
                 {isAuth ? (
                     <>
                         <Link onClick={() => handleMenu()} href={"/Login"}>
@@ -62,7 +61,7 @@ export default function MobileMenu({
                         </Link>
                     </>
                 )}
-            </div>
+            </nav>
         </>
     );
 }

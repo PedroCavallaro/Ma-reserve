@@ -1,9 +1,10 @@
 "use client";
-import { useRestaurant } from "@/app/hooks/useRestaurant";
+import { useRestaurant } from "@/hooks/useRestaurant";
 import RestaurantCircle from "../RestaurantCircle";
+import { serverRoutes } from "@/constants/constants";
 
 export default function CircleSection({ tittle }: { tittle: string }) {
-    const { restaurant } = useRestaurant();
+    const { restaurant } = useRestaurant(serverRoutes.RESTAURANTS);
 
     return (
         <section className="flex flex-col gap-1 p-2 relative">

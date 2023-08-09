@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { api } from "../lib/api";
-import { Gastronommy } from "../types";
+import { Gastronommy } from "@/@types/types";
 
 export function useFilter() {
     const [gastronomies, setGastronomies] = useState<Gastronommy[]>();

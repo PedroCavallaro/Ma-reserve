@@ -3,9 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import Logo from "../Logo";
 import UserSection from "./UserSection";
 import MobileMenu from "./MobileMenu";
-import { AuthContext } from "@/app/contexts/AuthContext";
+import { AuthContext } from "@/contexts/AuthContext";
 
-export default function NavBar() {
+export default function Header() {
     function handleMenu() {
         setIsMenuOpen(!isMenuOpen);
     }
@@ -13,7 +13,7 @@ export default function NavBar() {
     const { isAuth, logOut } = useContext(AuthContext);
 
     return (
-        <nav className="overflow-hidden p-2 h-[70px] shadow-md flex justify-between items-center ">
+        <header className="overflow-hidden p-2 h-[70px]  shadow-md flex justify-between items-center">
             <Logo handleMenu={handleMenu} />
             <UserSection handleMenu={handleMenu} isAuth={isAuth} />
 
@@ -27,6 +27,6 @@ export default function NavBar() {
                     logOut={logOut}
                 />
             </div>
-        </nav>
+        </header>
     );
 }

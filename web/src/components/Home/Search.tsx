@@ -21,7 +21,9 @@ export default function Search() {
                         className="w-full outline-none"
                     />
                 </label>
-                <Button text="Procurar" type="submit" />
+                <Button type="submit">
+                    <p>Procurar</p>
+                </Button>
             </form>
         </section>
     );

@@ -5,6 +5,7 @@ import CircleSection from "@/components/Home/CircleSection";
 import { useContext } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import CardSection from "@/components/Home/CardSection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
     const { isAuth } = useContext(AuthContext);
@@ -22,6 +23,7 @@ export default function Home() {
             ) : (
                 ""
             )}
+            <Footer />
         </main>
     );
 }

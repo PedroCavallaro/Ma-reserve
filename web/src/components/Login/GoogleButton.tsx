@@ -1,9 +1,9 @@
 import { useGoogleLogin, GoogleLogin } from "@react-oauth/google";
 import { PiGoogleLogo } from "react-icons/pi";
 import { useRouter } from "next/navigation";
-import { routes } from "@/app/constants/constants";
-import { api } from "@/app/lib/api";
-import { setToken } from "@/app/services/auth";
+import { routes } from "@/constants/constants";
+import { api } from "@/lib/api";
+import { setToken } from "@/services/auth";
 export default function GoogleButton() {
     const router = useRouter();
     const login = useGoogleLogin({

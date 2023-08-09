@@ -2,9 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Roboto_Flex as Roboto } from "next/font/google";
-import NavBar from "./components/NavBar/NavBar";
-import Providers from "./providers/Providers";
+import Providers from "@/providers/Providers";
 import { ReactNode } from "react";
+import Header from "@/components/NavBar/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 const roboto = Roboto({
@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <html lang="pt-br">
             <body className={`${inter.className} ${roboto.variable}`}>
                 <Providers>
-                    <NavBar />
+                    <Header />
                     {children}
                 </Providers>
             </body>

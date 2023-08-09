@@ -11,3 +11,8 @@ export const gastronomiesSaved = [
         name: "Brasileira",
     },
 ];
+
+export const serverRoutes = {
+    RESTAURANTS: "/restaurants",
+    ONERESTAURANT: (id: string) => `/restaurant/${id}`,
+};

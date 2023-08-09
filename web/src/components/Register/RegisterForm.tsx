@@ -6,7 +6,7 @@ import { Input } from "../Input";
 import { Button } from "../Button";
 import Link from "next/link";
 import { useContext } from "react";
-import { AuthContext } from "@/app/contexts/AuthContext";
+import { AuthContext } from "@/contexts/AuthContext";
 import { z } from "zod";
 import ErrorSpan from "../ErrorSpan";
 
@@ -70,7 +70,9 @@ export default function RegisterForm() {
                         placeholder="minimo 8 caracteres"
                     />
                 </label>
-                <Button text={`Cadastrar`} type="submit" />
+                <Button type="submit">
+                    <p>Cadastrar</p>
+                </Button>
                 <Link
                     href={"/Login"}
                     className="text-right text-sm mr-2 text-orange-400"

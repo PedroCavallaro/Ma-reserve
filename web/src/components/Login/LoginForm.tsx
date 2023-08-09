@@ -6,9 +6,9 @@ import { Input } from "../Input";
 import { Button } from "../Button";
 import Link from "next/link";
 import { useContext } from "react";
-import { AuthContext } from "@/app/contexts/AuthContext";
+import { AuthContext } from "@/contexts/AuthContext";
 import { z } from "zod";
-import { routes } from "@/app/constants/constants";
+import { routes } from "@/constants/constants";
 import ErrorSpan from "../ErrorSpan";
 import SocialLogin from "./SocialLogin";
 
@@ -59,7 +59,9 @@ export default function LoginForm() {
                     />
                     {authState.error && <ErrorSpan text="Senha incorreta" />}
                 </label>
-                <Button text="Entrar" type="submit" />
+                <Button type="submit">
+                    <p>Entrar</p>
+                </Button>
                 <Link href={"/"} className="text-right text-sm mr-2 ">
                     Esqueceu sua senha?
                 </Link>
@@ -69,11 +71,9 @@ export default function LoginForm() {
                     Não tem uma conta?
                 </p>
                 <Link href={routes.REGISTER} className="flex ">
-                    <Button
-                        text="Cadastre-se"
-                        type="button"
-                        className=" w-full"
-                    />
+                    <Button type="button" className=" w-full">
+                        <p>Cadastre-se</p>
+                    </Button>
                 </Link>
             </div>
             <div className="flex flex-col text-sm items-center text-zinc-500">
