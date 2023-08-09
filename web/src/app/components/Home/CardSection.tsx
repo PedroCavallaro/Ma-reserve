@@ -1,8 +1,6 @@
 "use client";
 import { useRestaurant } from "@/app/hooks/useRestaurant";
 import RestaurantCard from "../RestaurantCard";
-import Section from "../Section";
-import { text } from "stream/consumers";
 
 export default function CardSection({ tittle }: { tittle: string }) {
     const { restaurant } = useRestaurant();

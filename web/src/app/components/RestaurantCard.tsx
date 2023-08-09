@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { routes } from "../constants/constants";
 interface RestaurantCardProps {
     id: string;
     name: string;
@@ -19,8 +21,9 @@ export default function RestaurantCard({
     Gastronomy,
 }: RestaurantCardProps) {
     return (
-        <div className="">
-            <button
+        <div>
+            <Link
+                href={`${routes.RESTAURANT}?id=${id}`}
                 onClick={() => console.log(id)}
                 className="flex w-[17rem] h-[8rem] items-center px-1 gap-2 shadow-lg rounded-md"
             >
@@ -54,7 +57,7 @@ export default function RestaurantCard({
                         {about.substring(0, 30).concat("...")}
                     </p>
                 </div>
-            </button>
+            </Link>
         </div>
     );
 }
