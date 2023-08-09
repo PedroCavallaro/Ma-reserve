@@ -1,10 +1,10 @@
 "use client";
-import Search from "../components/Home/Search";
-import GastronomyFilter from "../components/Home/GastronomyFilter";
-import CircleSection from "../components/Home/CircleSection";
+import Search from "@/components/Home/Search";
+import GastronomyFilter from "@/components/Home/GastronomyFilter";
+import CircleSection from "@/components/Home/CircleSection";
 import { useContext } from "react";
-import { AuthContext } from "../contexts/AuthContext";
-import CardSection from "../components/Home/CardSection";
+import { AuthContext } from "@/contexts/AuthContext";
+import CardSection from "@/components/Home/CardSection";
 
 export default function Home() {
     const { isAuth } = useContext(AuthContext);
@@ -16,6 +16,8 @@ export default function Home() {
                 <>
                     <CardSection tittle="Talvez te interesse" />
                     <CircleSection tittle="Reserve novamente" />
+                    <CircleSection tittle="Restaurantes Salvos" />
+                    <CardSection tittle="Restaurantes famosos" />
                 </>
             ) : (
                 ""

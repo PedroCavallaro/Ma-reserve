@@ -23,7 +23,7 @@ export default function RestaurantCard({
     return (
         <div>
             <Link
-                href={`${routes.RESTAURANT}?id=${id}`}
+                href={`${routes.RESTAURANT}/${id}`}
                 onClick={() => console.log(id)}
                 className="flex w-[17rem] h-[8rem] items-center px-1 gap-2 shadow-lg rounded-md"
             >
