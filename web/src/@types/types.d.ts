@@ -18,6 +18,8 @@ export type RestaurantInfo = {
     coverImage: string;
     highlights: string[];
     about: string;
+    latitude: number;
+    longitude: number;
     Gastronomy: {
         description: string;
     };
