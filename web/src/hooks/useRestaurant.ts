@@ -13,7 +13,7 @@ export function useRestaurant(route: string) {
     useEffect(() => {
         handleRestaurants();
     }, [handleRestaurants]);
-
+    console.log(restaurant);
     return {
         restaurant,
     };
