@@ -2,6 +2,7 @@ import { RestaurantInfo } from "@/@types/types";
 import { BsBookmarks } from "react-icons/bs";
 import { Button } from "../Button";
 import Image from "next/image";
+import Slider from "./Slider";
 export default function Hero({
     name,
     about,
@@ -25,30 +26,8 @@ export default function Hero({
                     <p>Ver Cardápio</p>
                 </Button>
             </div>
-            <div className="flex justify-between items-center">
-                <div className="flex justify-between flex-col gap-1">
-                    <Image
-                        alt={`Restaurant ${name}`}
-                        src={"/test.jpeg"}
-                        width={200}
-                        height={50}
-                        className="w-44 h-20 object-cover"
-                    />
-                    <Image
-                        alt={`Restaurant ${name}`}
-                        src={"/test.jpeg"}
-                        width={200}
-                        height={50}
-                        className="w-44 h-20 object-cover"
-                    />
-                </div>
-                <Image
-                    alt={`Restaurant ${name}`}
-                    src={"/test.jpeg"}
-                    width={200}
-                    height={50}
-                    className="h-[10.25rem] object-cover"
-                />
+            <div className="flex items-center w-full relative justify-center">
+                <Slider />
             </div>
         </section>
     );

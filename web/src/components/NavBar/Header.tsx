@@ -19,7 +19,7 @@ export default function Header() {
 
             <div
                 data-menuopen={isMenuOpen}
-                className="fixed flex flex-col gap-6 w-screen top-2 -right-[40rem] data-[menuopen=true]:-right-0 transition-all  px-2 z-50 bg-white h-full"
+                className="fixed flex flex-col lg:hidden gap-6 w-screen top-2 -right-[40rem] data-[menuopen=true]:-right-0 transition-all  px-2 z-50 bg-white h-full"
             >
                 <MobileMenu
                     handleMenu={handleMenu}
