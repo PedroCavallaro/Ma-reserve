@@ -24,7 +24,7 @@ export default function Slider({ images }: { images: Array<string> }) {
                             height={300}
                             alt="a"
                             width={300}
-                            className={`w-full h-[14rem] object-cover bg-gray-700 rounded-lg`}
+                            className={`w-full h-[12rem] object-cover bg-gray-700 rounded-lg mt-2`}
                         />
                     </SwiperSlide>
                 );

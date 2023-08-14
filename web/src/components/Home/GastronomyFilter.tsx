@@ -1,6 +1,6 @@
 "use client";
 import { useFilter } from "@/hooks/useFilter";
-import { BiSushi } from "react-icons/bi";
+import { LuChefHat } from "react-icons/lu";
 export default function GastronomyFilter() {
     const { gastronomies } = useFilter();
     return (
@@ -12,15 +12,15 @@ export default function GastronomyFilter() {
                 </p>
                 <div className="w-full h-1 bg-orange-300 rounded-full"></div>
             </div>
-            <div className="px-2 flex gap-6 overflow-scroll">
+            <div className="px-2 flex gap-6 overflow-scroll justify-center items-center">
                 {gastronomies?.map((gastronomy, index) => {
                     return (
                         <button
                             key={index.toString()}
                             className="flex flex-col items-center gap-2"
                         >
-                            <div className="bg-orange-300 rounded-full h-10 w-10 flex items-center  justify-center">
-                                <BiSushi color={"#FFF"} className="w-7 h-7" />
+                            <div className="bg-orange-300 rounded-full h-10 w-10 flex items-center justify-center">
+                                <LuChefHat color={"#FFF"} className="w-7 h-7" />
                             </div>
                             <p className="text-sm">{gastronomy.description}</p>
                         </button>

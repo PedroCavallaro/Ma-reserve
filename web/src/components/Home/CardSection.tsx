@@ -1,16 +1,20 @@
 "use client";
-import { useRestaurant } from "@/hooks/useRestaurant";
 import RestaurantCard from "../RestaurantCard";
 import { serverRoutes } from "@/constants/constants";
+import { RestaurantInfo } from "@/@types/types";
 
-export default function CardSection({ tittle }: { tittle: string }) {
-    const { restaurant } = useRestaurant(serverRoutes.RESTAURANTS);
-
+export default function CardSection({
+    tittle,
+    restaurants,
+}: {
+    tittle: string;
+    restaurants: RestaurantInfo[];
+}) {
     return (
         <section className="flex flex-col gap-1 p-2 relative">
             <p className="text-orange-400 font-semibold ">{tittle}</p>
             <div className="flex overflow-scroll relative gap-2 py-3">
-                {restaurant?.map(
+                {restaurants?.map(
                     (
                         { id, name, about, coverImage, highlights, Gastronomy },
                         index
