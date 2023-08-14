@@ -13,6 +13,7 @@ datasource db {
 model Restaurant {
   id           String        @id @default(uuid())
   name         String
+  coverImage   String        @default("")
   pictures     String[]
   max_guests   Int
   highlights   String[]
@@ -24,6 +25,7 @@ model Restaurant {
   Reservation  Reservation[]
   Menu         Menu[]
   Comments     Comments[]
+  wishList     WishList[]
   City         City?         @relation(fields: [cityId], references: [id])
   cityId       String?
   Gastronomy   Gastronomy?   @relation(fields: [gastronomyId], references: [id])
@@ -76,17 +78,18 @@ model Comments {
 }
 
 model User {
-  id          String        @id @default(cuid())
+  id          String        @id @default(uuid())
   name        String?
   password    String?
   email       String        @unique
+  wishiList   WishList[]
   image       String?
   Reservation Reservation[]
   Comments    Comments[]
 }
 
 model City {
-  id         String       @id @default(cuid())
+  id         String       @id @default(uuid())
   name       String
   State      State?       @relation(fields: [stateId], references: [id])
   stateId    String?
@@ -94,8 +97,16 @@ model City {
 }
 
 model State {
-  id           String @id @default(cuid())
+  id           String @id @default(uuid())
   name         String
   abbreviation String
   City         City[]
+}
+
+model WishList {
+  id           String      @id @default(uuid())
+  User         User?       @relation(fields: [userId], references: [id])
+  userId       String?
+  Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurantId String?
 }
