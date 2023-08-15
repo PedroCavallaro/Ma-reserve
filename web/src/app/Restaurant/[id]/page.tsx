@@ -10,50 +10,40 @@ import { usePathname } from "next/navigation";
 
 export default function Restaurant() {
     const id = usePathname().split("/")[2];
-    const { data: restaurant, isLoading } = useQuery<RestaurantInfo[]>({
+    const { data: restaurant, isLoading } = useQuery<RestaurantInfo>({
         queryKey: ["restaurant"],
         queryFn: () => getRestaurant(id),
     });
 
-    return (
-        <main>
-            {restaurant?.map(
-                (
-                    {
-                        name,
-                        about,
-                        id,
-                        coverImage,
-                        pictures,
-                        Gastronomy,
-                        highlights,
-                        Comments,
-                        latitude,
-                        longitude,
-                    },
-                    index
-                ) => {
-                    return (
-                        <section
-                            key={index.toString()}
-                            className="flex flex-col px-2 gap-4"
-                        >
-                            <Hero name={name} about={about} id={id} />
-                            <ExtraInfo
-                                gastronomy={Gastronomy.description}
-                                highlights={highlights}
-                            />
-                            {/* <Location
-                                latitude={latitude}
-                                longitude={longitude}
-                            /> */}
-                            <Button className="w-full h-9">
-                                <p>Reservar</p>
-                            </Button>
-                        </section>
-                    );
-                }
-            )}
-        </main>
-    );
+    if (isLoading) {
+        return (
+            <section>
+                <p>Carregando</p>
+            </section>
+        );
+    }
+    if (typeof restaurant !== "undefined") {
+        return (
+            <main>
+                <section className="flex flex-col px-2 gap-4">
+                    <Hero
+                        name={restaurant?.name}
+                        about={restaurant?.about}
+                        id={id}
+                    />
+                    <ExtraInfo
+                        gastronomy={restaurant?.Gastronomy.description}
+                        highlights={restaurant?.highlights}
+                    />
+                    {/* <Location
+                                    latitude={latitude}
+                                    longitude={longitude}
+                                /> */}
+                    <Button className="w-full h-9">
+                        <p>Reservar</p>
+                    </Button>
+                </section>
+            </main>
+        );
+    }
 }

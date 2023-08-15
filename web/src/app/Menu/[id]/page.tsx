@@ -6,13 +6,14 @@ import PlateCard from "@/components/Menu/PlateCard";
 import { FoodTypes } from "@/constants/constants";
 import { getRestaurant } from "@/services/restaurant";
 import { useQuery } from "@tanstack/react-query";
+import { data } from "autoprefixer";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function Menu() {
     const [type, setType] = useState(FoodTypes[0] as string);
     const id = usePathname().split("/")[2];
-    const { data: restaurant, isLoading } = useQuery<RestaurantInfo[]>({
+    const { data: restaurant, isLoading } = useQuery<RestaurantInfo>({
         queryKey: ["restaurant"],
         queryFn: () => getRestaurant(id),
     });
@@ -28,7 +29,7 @@ export default function Menu() {
         );
     }
     if (typeof restaurant !== "undefined") {
-        const { Menu } = restaurant[0];
+        const { Menu } = restaurant;
         const filteredMenu = Menu!.filter(
             (e) => e.FoodType?.description === type
         );
@@ -37,8 +38,8 @@ export default function Menu() {
             <main>
                 <section className="flex flex-col gap-4 mt-3">
                     <Hero
-                        coverImage={restaurant[0].coverImage}
-                        name={restaurant[0].name}
+                        coverImage={restaurant.coverImage}
+                        name={restaurant.name}
                     />
 
                     <div className="flex gap-2 px-2">

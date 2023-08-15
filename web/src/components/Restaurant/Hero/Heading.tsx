@@ -1,4 +1,5 @@
 import { Button } from "@/components/Button";
+import { routes } from "@/constants/constants";
 import { addToWishList } from "@/services/wishList";
 import Link from "next/link";
 import { BsBookmarks } from "react-icons/bs";
@@ -24,7 +25,7 @@ export default function Heading({
                 </Button>
             </div>
             <Button className="h-8 text-sm">
-                <Link href={`/Menu/${id}`}>Ver Cardápio</Link>
+                <Link href={`${routes.MENU}${id}`}>Ver Cardápio</Link>
             </Button>
         </div>
     );
