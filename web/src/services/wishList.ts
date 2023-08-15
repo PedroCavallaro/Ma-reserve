@@ -8,3 +8,12 @@ export async function addToWishList(restaurantId: string): Promise<void> {
         restaurantId,
     });
 }
+export async function removeFromWishList(restaurantId: string): Promise<void> {
+    const { sub } = getUser();
+    await api.delete("/whishlist", {
+        data: {
+            userId: sub,
+            restaurantId,
+        },
+    });
+}

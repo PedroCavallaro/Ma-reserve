@@ -11,7 +11,7 @@ export default function Hero({
     return (
         <section className=" py-1 gap-1 mt-1 flex flex-col">
             <Heading restaurantName={name} id={id} />
-            <div className="w-full  relative flex justify-center items-center px- mt-1">
+            <div className="w-full  relative flex justify-center items-center ">
                 <Slider images={images} />
             </div>
             <About about={about} />

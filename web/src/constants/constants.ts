@@ -3,16 +3,11 @@ export const routes = {
     LOGIN: "/Login",
     REGISTER: "/Register",
     RESTAURANT: "/Restaurant/",
-    MENU: "/Restaurant/Menu/",
+    MENU: "Menu/",
 } as const;
-
-export const gastronomiesSaved = [
-    {
-        name: "Brasileira",
-    },
-];
 
 export const serverRoutes = {
     RESTAURANTS: "/restaurants",
     ONERESTAURANT: (id: string) => `/restaurant/${id}`,
 };
+export const FoodTypes = ["Pratos", "Sobremesa", "Bebidas"] as const;

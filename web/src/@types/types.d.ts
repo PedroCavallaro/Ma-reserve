@@ -23,23 +23,25 @@ export type RestaurantInfo = {
     Gastronomy: {
         description: string;
     };
-    Comments?: [
-        {
-            comment: string;
-            User: {
-                name: string;
-                image: string;
-            };
-        }
-    ];
-    Menu?: [
-        {
-            description: string;
-            price: number;
-            pictures: Array<string>;
-            FoodType: {
-                description: string;
-            };
-        }
-    ];
+    Comments?: [Comment];
+    Menu?: [Menu];
+};
+export type Menu = {
+    name: string;
+    description: string;
+    price: number;
+    pictures: Array<string>;
+    FoodType?: {
+        description: string;
+    };
+};
+export type Comment = {
+    comment: string;
+    User: {
+        name: string;
+        image: string;
+    };
+};
+export type FoodType = {
+    description: true;
 };
