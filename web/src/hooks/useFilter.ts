@@ -13,7 +13,7 @@ export function useFilter() {
     useEffect(() => {
         handleGastronmy();
     }, [handleGastronmy]);
-
+    console.log(gastronomies);
     return {
         gastronomies,
     };

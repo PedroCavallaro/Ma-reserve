@@ -5,7 +5,7 @@ import { routes } from "@/constants/constants";
 import { useRestaurant } from "@/hooks/useRestaurant";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export default function Results({ params }: { params: { query: string } }) {
     const router = useRouter();
@@ -14,30 +14,38 @@ export default function Results({ params }: { params: { query: string } }) {
         useRestaurant();
 
     const handlerTextQuery = useCallback(async () => {
-        setRestaurants(await getRestaurantsByQuery(params.query[1]));
-    }, [params.query, getRestaurantsByQuery]);
+        const res = await getRestaurantsByQuery(params.query[1]);
+        setRestaurants(res);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleGastronomyQuery = useCallback(async () => {
-        setRestaurants(await getRestaurantsByGastronomy(params.query[1]));
-    }, [getRestaurantsByGastronomy, params.query]);
+        const res = await getRestaurantsByGastronomy(params.query[1]);
+        setRestaurants(res);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
+        if (params.query.length > 2) {
+            router.push("/");
+        }
         if (params.query.includes("query")) {
             handlerTextQuery();
         }
         if (params.query.includes("gastronomy")) {
             handleGastronomyQuery();
         }
-    }, [router, params.query, handleGastronomyQuery, handlerTextQuery]);
+    }, [params, router, handlerTextQuery, handleGastronomyQuery]);
 
-    console.log(params.query);
     return (
         <main>
             <section className="flex flex-col justify-center items-center gap-4 mt-5">
                 <h2 className="text-orange-400 text-lg">
                     Resultados encontrados
                 </h2>
-                <div>
+                <div className="flex flex-col gap-4">
                     {restaurants?.map(
                         (
                             {
@@ -59,6 +67,7 @@ export default function Results({ params }: { params: { query: string } }) {
                                     coverImage={coverImage}
                                     highlights={highlights}
                                     name={name}
+                                    isFull
                                 />
                             );
                         }

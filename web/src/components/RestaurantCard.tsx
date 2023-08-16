@@ -11,6 +11,7 @@ interface RestaurantCardProps {
     Gastronomy: {
         description: string;
     };
+    isFull?: boolean;
 }
 export default function RestaurantCard({
     id,
@@ -19,19 +20,24 @@ export default function RestaurantCard({
     coverImage,
     highlights,
     Gastronomy,
+    isFull,
 }: RestaurantCardProps) {
     return (
         <div>
             <Link
                 href={`${routes.RESTAURANT}/${id}`}
-                className="flex w-[17rem] h-[8rem] items-center px-1 gap-2 shadow-lg rounded-md"
+                className={`flex
+                ${isFull ? "w-[25rem] h-[10rem]" : " w-[18rem]  h-[8rem]"}
+                items-center px-1 gap-2 shadow-lg rounded-md`}
             >
                 <Image
                     src={`/${coverImage}`}
                     width={120}
                     height={120}
                     alt={`Restaurante ${name}`}
-                    className="h-full  py-1 object-cover"
+                    className={`
+                               ${isFull ? "w-[10rem] " : " "}
+                    h-full px-1  py-1 object-cover`}
                 />
                 <div className="flex flex-col gap-1">
                     <h2 className="text-md text-orange-400">{name}</h2>
@@ -53,7 +59,9 @@ export default function RestaurantCard({
                         })}
                     </div>
                     <p className="text-xs text-left">
-                        {about.substring(0, 30).concat("...")}
+                        {isFull
+                            ? about.substring(0, 100).concat("...")
+                            : about.substring(0, 30).concat("...")}
                     </p>
                 </div>
             </Link>
