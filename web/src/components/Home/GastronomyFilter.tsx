@@ -1,5 +1,7 @@
 "use client";
+import { routes } from "@/constants/constants";
 import { useFilter } from "@/hooks/useFilter";
+import Link from "next/link";
 import { LuChefHat } from "react-icons/lu";
 export default function GastronomyFilter() {
     const { gastronomies } = useFilter();
@@ -15,7 +17,8 @@ export default function GastronomyFilter() {
             <div className="px-2 flex gap-6 overflow-scroll justify-center items-center">
                 {gastronomies?.map((gastronomy, index) => {
                     return (
-                        <button
+                        <Link
+                            href={`${routes.GASTRONOMYQUERY}${gastronomy.id}`}
                             key={index.toString()}
                             className="flex flex-col items-center gap-2"
                         >
@@ -23,7 +26,7 @@ export default function GastronomyFilter() {
                                 <LuChefHat color={"#FFF"} className="w-7 h-7" />
                             </div>
                             <p className="text-sm">{gastronomy.description}</p>
-                        </button>
+                        </Link>
                     );
                 })}
             </div>

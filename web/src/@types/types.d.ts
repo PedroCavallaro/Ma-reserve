@@ -9,7 +9,8 @@ export type RegisterData = {
 };
 
 export type Gastronommy = {
-    description: true;
+    id: string;
+    description: string;
 };
 export type RestaurantInfo = {
     id: string;

@@ -4,6 +4,8 @@ export const routes = {
     REGISTER: "/Register",
     RESTAURANT: "/Restaurant/",
     MENU: "/Menu/",
+    GASTRONOMYQUERY: "/Results/gastronomy/",
+    TEXTQUERY: "/Results/",
 } as const;
 
 export const serverRoutes = {
