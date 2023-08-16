@@ -13,9 +13,10 @@ export default function CircleSection({
         <section className="flex flex-col gap-1 p-2 relative">
             <p className="text-orange-400 font-semibold ">{tittle}</p>
             <div className="flex overflow-scroll relative gap-3 py-3">
-                {restaurants?.map(({ name, coverImage }, index) => {
+                {restaurants?.map(({ name, coverImage, id }, index) => {
                     return (
                         <RestaurantCircle
+                            id={id}
                             key={index.toString()}
                             image={coverImage}
                             name={name}

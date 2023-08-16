@@ -4,15 +4,15 @@ import Filter from "@/components/Menu/Filter";
 import Hero from "@/components/Menu/Hero";
 import PlateCard from "@/components/Menu/PlateCard";
 import { FoodTypes } from "@/constants/constants";
-import { getRestaurant } from "@/services/restaurant";
+import { useRestaurant } from "@/hooks/useRestaurant";
 import { useQuery } from "@tanstack/react-query";
-import { data } from "autoprefixer";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 export default function Menu() {
     const [type, setType] = useState(FoodTypes[0] as string);
     const id = usePathname().split("/")[2];
+    const { getRestaurant } = useRestaurant();
     const { data: restaurant, isLoading } = useQuery<RestaurantInfo>({
         queryKey: ["restaurant"],
         queryFn: () => getRestaurant(id),

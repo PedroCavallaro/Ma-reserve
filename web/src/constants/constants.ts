@@ -11,5 +11,6 @@ export const routes = {
 export const serverRoutes = {
     RESTAURANTS: "/restaurants",
     ONERESTAURANT: (id: string) => `/restaurant/${id}`,
+    RESTAURANTSBYGASTRONOMY: (id: string) => `/filteredRestaurants/${id}`,
 };
 export const FoodTypes = ["Pratos", "Bebidas", "Sobremesa"] as const;
