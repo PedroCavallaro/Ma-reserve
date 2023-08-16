@@ -1,6 +1,7 @@
 "use client";
 import { RestaurantInfo } from "@/@types/types";
 import RestaurantCard from "@/components/RestaurantCard";
+import NotFound from "@/components/Results/NotFound";
 import { routes } from "@/constants/constants";
 import { useRestaurant } from "@/hooks/useRestaurant";
 import { useQuery } from "@tanstack/react-query";
@@ -38,7 +39,9 @@ export default function Results({ params }: { params: { query: string } }) {
             handleGastronomyQuery();
         }
     }, [params, router, handlerTextQuery, handleGastronomyQuery]);
-
+    if (!restaurants?.length) {
+        return <NotFound />;
+    }
     return (
         <main>
             <section className="flex flex-col justify-center items-center gap-4 mt-5">
