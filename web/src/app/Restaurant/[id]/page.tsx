@@ -6,9 +6,15 @@ import Hero from "@/components/Restaurant/Hero/Hero";
 import Location from "@/components/Restaurant/Location/Location";
 import { useRestaurant } from "@/hooks/useRestaurant";
 import { useQuery } from "@tanstack/react-query";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import router from "next/router";
 
 export default function Restaurant() {
+    const router = useRouter();
+    function setRestaurntidonLs(id: string) {
+        localStorage.setItem("reservation", JSON.stringify(id));
+        router.push("/Reservation");
+    }
     const id = usePathname().split("/")[2];
     const { getRestaurant } = useRestaurant();
     const { data: restaurant, isLoading } = useQuery<RestaurantInfo>({
@@ -40,7 +46,10 @@ export default function Restaurant() {
                                     latitude={latitude}
                                     longitude={longitude}
                                 /> */}
-                    <Button className="w-full h-9">
+                    <Button
+                        className="w-full h-9"
+                        onClick={() => setRestaurntidonLs(id)}
+                    >
                         <p>Reservar</p>
                     </Button>
                 </section>

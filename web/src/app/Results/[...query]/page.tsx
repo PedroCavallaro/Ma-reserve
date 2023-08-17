@@ -2,9 +2,7 @@
 import { RestaurantInfo } from "@/@types/types";
 import RestaurantCard from "@/components/RestaurantCard";
 import NotFound from "@/components/Results/NotFound";
-import { routes } from "@/constants/constants";
 import { useRestaurant } from "@/hooks/useRestaurant";
-import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 

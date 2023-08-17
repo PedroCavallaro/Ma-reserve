@@ -4,7 +4,7 @@ import Logo from "./Logo";
 
 export default function Footer() {
     return (
-        <section className="p-2 bg-zinc-100 flex justify-between">
+        <section className="p-2 bg-zinc-100 flex justify-between relative bottom-0">
             <div className="flex flex-col gap-5">
                 <Logo />
                 <div className="flex gap-2 ml-2">

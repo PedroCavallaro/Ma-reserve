@@ -17,7 +17,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
                 {label && <p className="text-orange-400 text-sm">{label}</p>}
                 <input
                     className={twMerge(
-                        `rounded-md h-10 p-1 outline-none ${className}`
+                        `rounded-md h-10 p-1 outline-none shadow-md ${className}`
                     )}
                     name={name}
                     type={type}
