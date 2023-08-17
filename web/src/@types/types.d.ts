@@ -46,3 +46,11 @@ export type Comment = {
 export type FoodType = {
     description: true;
 };
+
+export type ReservationData = {
+    name: string;
+    phone: string;
+    guests: number;
+    day: Date;
+    time: string;
+};

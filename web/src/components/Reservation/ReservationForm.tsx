@@ -3,6 +3,9 @@ import { Input } from "../Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Button } from "../Button";
+import { ReservationData } from "@/@types/types";
+import { api } from "@/lib/api";
+import { data } from "autoprefixer";
 
 const schema = z.object({
     name: z.string().min(4, "O nome deve ser maior"),
@@ -12,6 +15,23 @@ const schema = z.object({
     time: z.string().max(5),
 });
 type FormData = z.infer<typeof schema>;
+
+async function createReservation({
+    name,
+    time,
+    day,
+    guests,
+    phone,
+}: ReservationData) {
+    await api.post("/reservation", {
+        name,
+        time,
+        day,
+        guests,
+        phone,
+    });
+}
+
 export default function ReservationForm() {
     const {
         register,
@@ -23,7 +43,10 @@ export default function ReservationForm() {
     });
     return (
         <div className="px-2">
-            <form className="flex flex-col gap-4 overflow-x-hidden">
+            <form
+                onSubmit={handleSubmit((data) => createReservation(data))}
+                className="flex flex-col gap-4 overflow-x-hidden"
+            >
                 <div className="flex flex-col">
                     <Input
                         label="Nome"

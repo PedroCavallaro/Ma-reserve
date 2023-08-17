@@ -6,7 +6,7 @@ import ReservationForm from "@/components/Reservation/ReservationForm";
 import Warning from "@/components/Reservation/Warning";
 import { useRestaurant } from "@/hooks/useRestaurant";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Reservation() {
     const { getRestaurant } = useRestaurant();
@@ -40,7 +40,7 @@ export default function Reservation() {
     }
     return (
         <main className="h-screen w-full flex flex-col justify-between overflow-x-hidden">
-            <section className="mt-3 flex flex-col ">
+            <section className="mt-3 flex flex-col gap-2">
                 <Hero
                     coverImage={restaurant!.coverImage}
                     name={restaurant!.name}
